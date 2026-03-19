@@ -46,9 +46,20 @@
       transform: scale(1.1);
     }
 
-    #dashboard, #adminPanel {
+    #dashboard {
       display: none;
       margin-top: 30px;
+    }
+
+    /* 🔥 ADMIN PANEL WITH YOUR IMAGE */
+    #adminPanel {
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 20px;
+      background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://iili.io/qw42EIs.jpg') no-repeat center center/cover;
     }
 
     .card {
@@ -111,9 +122,8 @@
 
   <h2>👑 Admin Panel</h2>
 
-  <!-- 🔥 GIF ADDED HERE -->
+  <!-- GIF -->
   <div class="card">
-    <h3>🔥 Admin Vibes</h3>
     <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
          style="width:100%; border-radius:20px;">
   </div>
@@ -148,13 +158,11 @@
     const otp = document.getElementById("otp").value;
 
     if(phone === allowedPhone && otp === otpCode){
-
       document.getElementById("login").style.display = "none";
       document.getElementById("adminLogin").style.display = "none";
       document.getElementById("adminPanel").style.display = "none";
 
       document.getElementById("dashboard").style.display = "block";
-
     } else {
       alert("Wrong details ❌");
     }
@@ -165,13 +173,11 @@
     const pass = document.getElementById("adminPass").value;
 
     if(email === adminEmailFixed && pass === adminPasswordFixed){
-
       document.getElementById("login").style.display = "none";
       document.getElementById("adminLogin").style.display = "none";
       document.getElementById("dashboard").style.display = "none";
 
       document.getElementById("adminPanel").style.display = "block";
-
     } else {
       alert("Wrong Admin Login ❌");
     }
