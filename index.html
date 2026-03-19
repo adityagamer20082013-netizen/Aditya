@@ -111,6 +111,13 @@
 
   <h2>👑 Admin Panel</h2>
 
+  <!-- 🔥 GIF ADDED HERE -->
+  <div class="card">
+    <h3>🔥 Admin Vibes</h3>
+    <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
+         style="width:100%; border-radius:20px;">
+  </div>
+
   <h3>Change Welcome Text</h3>
   <input type="text" id="newText" placeholder="New Text">
   <button onclick="changeText()">Update</button>
@@ -120,11 +127,9 @@
 </div>
 
 <script>
-  // USER DATA
   const allowedPhone = "8872529805";
   const otpCode = "2013";
 
-  // ADMIN DATA
   const adminEmailFixed = "admin@gmail.com";
   const adminPasswordFixed = "admin2013";
 
@@ -144,12 +149,10 @@
 
     if(phone === allowedPhone && otp === otpCode){
 
-      // hide all
       document.getElementById("login").style.display = "none";
       document.getElementById("adminLogin").style.display = "none";
       document.getElementById("adminPanel").style.display = "none";
 
-      // show user dashboard
       document.getElementById("dashboard").style.display = "block";
 
     } else {
@@ -163,12 +166,10 @@
 
     if(email === adminEmailFixed && pass === adminPasswordFixed){
 
-      // hide all
       document.getElementById("login").style.display = "none";
       document.getElementById("adminLogin").style.display = "none";
       document.getElementById("dashboard").style.display = "none";
 
-      // show admin panel
       document.getElementById("adminPanel").style.display = "block";
 
     } else {
