@@ -2,27 +2,81 @@
 <html>
 <head>
   <title>Aditya Gamer</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      color: white;
+      text-align: center;
+      height: 100vh;
+
+      /* Animated gradient background */
+      background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      margin-top: 100px;
+      color: orange;
+      text-shadow: 0 0 10px orange;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    .yt {
+      background: red;
+      box-shadow: 0 0 10px red;
+    }
+
+    .insta {
+      background: purple;
+      box-shadow: 0 0 10px purple;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px white;
+    }
+  </style>
 </head>
 
-<body style="background:black; color:white; text-align:center; font-family:sans-serif;">
+<body>
 
-  <h1 style="color:orange;">🔥 Welcome to AdityaGamerYT 🔥</h1>
+  <h1>🔥 Welcome to AdityaGamerYT 🔥</h1>
 
-  <p style="font-size:20px;">😎 Minecraft Player</p>
+  <p>😎 Minecraft Player</p>
   <p>Subscribe for more!</p>
 
   <!-- YouTube -->
   <a href="https://youtube.com/@adityagameryt-s-3p?si=ddUVJAYxBK8dqBEZ" target="_blank">
-    <button style="padding:10px; margin:10px; background:red; color:white; border:none; border-radius:5px;">
-      ▶ Subscribe on YouTube
-    </button>
+    <button class="btn yt">▶ Subscribe on YouTube</button>
   </a>
 
   <!-- Instagram -->
   <a href="https://www.instagram.com/_btwitsadityagg" target="_blank">
-    <button style="padding:10px; margin:10px; background:purple; color:white; border:none; border-radius:5px;">
-      📸 Follow on Instagram
-    </button>
+    <button class="btn insta">📸 Follow on Instagram</button>
   </a>
 
 </body>
