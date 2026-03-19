@@ -21,21 +21,7 @@
     }
 
     h1 {
-      margin-top: 30px;
-      text-shadow: 0 0 20px black;
-    }
-
-    .welcome {
-      font-size: 28px;
       margin-top: 20px;
-      color: yellow;
-      text-shadow: 0 0 10px black;
-    }
-
-    .subtext {
-      font-size: 18px;
-      margin-bottom: 20px;
-      color: #fff;
     }
 
     input {
@@ -43,7 +29,7 @@
       margin: 10px;
       border-radius: 10px;
       border: none;
-      width: 200px;
+      width: 220px;
     }
 
     button {
@@ -66,7 +52,7 @@
 
     #dashboard {
       display: none;
-      margin-top: 40px;
+      margin-top: 30px;
     }
 
     .card {
@@ -75,7 +61,12 @@
       padding: 20px;
       border-radius: 20px;
       width: 260px;
-      box-shadow: 0 0 20px black;
+    }
+
+    .promo {
+      margin-top: 20px;
+      font-size: 18px;
+      color: yellow;
     }
   </style>
 </head>
@@ -85,18 +76,25 @@
 <h1>🔥 AdityaGamerYT 🔥</h1>
 
 <div id="login">
-  <input type="text" id="phone" placeholder="+91XXXXXXXXXX"><br>
-  <div id="recaptcha-container"></div>
-  <button onclick="sendOTP()">Send OTP</button><br>
+
+  <input type="text" id="phone" placeholder="Enter Phone Number"><br>
+
+  <button onclick="fakeOTP()">Send OTP</button><br>
+
   <input type="text" id="otp" placeholder="Enter OTP"><br>
-  <button onclick="verifyOTP()">Login</button>
+
+  <button onclick="login()">Login</button>
+
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard">
 
-  <div class="welcome">🔥 Welcome to AdityaGamerYT 🔥</div>
-  <div class="subtext">👉 Follow on Instagram & Subscribe on YouTube 👇</div>
+  <h2>🔥 Welcome to AdityaGamerYT 🔥</h2>
+
+  <div class="promo">
+    👉 Follow on Instagram & Subscribe on YouTube to join my gaming world 😎🔥
+  </div>
 
   <div class="card">
     <h3>📸 Instagram</h3>
@@ -114,45 +112,30 @@
 
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
 <script>
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    appId: "YOUR_APP_ID"
-  };
+  const allowedPhone = "8872529805";
+  const secretCode = "2013";
 
-  firebase.initializeApp(firebaseConfig);
+  function fakeOTP(){
+    const phone = document.getElementById("phone").value;
 
-  const auth = firebase.auth();
-
-  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-
-  function sendOTP(){
-    const phoneNumber = document.getElementById("phone").value;
-
-    auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
-      .then(function(confirmationResult){
-        window.confirmationResult = confirmationResult;
-        alert("OTP Sent 🔥");
-      }).catch(function(error){
-        alert(error.message);
-      });
+    if(phone === allowedPhone){
+      alert("OTP Sent to your number 📱 (Code: 2013)");
+    } else {
+      alert("Number not allowed ❌");
+    }
   }
 
-  function verifyOTP(){
+  function login(){
+    const phone = document.getElementById("phone").value;
     const code = document.getElementById("otp").value;
 
-    confirmationResult.confirm(code)
-      .then(function(result){
-        document.getElementById("login").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
-      }).catch(function(error){
-        alert("Wrong OTP ❌");
-      });
+    if(phone === allowedPhone && code === secretCode){
+      document.getElementById("login").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+    } else {
+      alert("Access Denied ❌");
+    }
   }
 </script>
 
