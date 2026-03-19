@@ -102,6 +102,8 @@
     </a>
   </div>
 
+  <button onclick="logout()">🔄 Logout</button>
+
 </div>
 
 <!-- ADMIN PANEL -->
@@ -112,6 +114,8 @@
   <h3>Change Welcome Text</h3>
   <input type="text" id="newText" placeholder="New Text">
   <button onclick="changeText()">Update</button>
+
+  <button onclick="logout()">🔄 Logout</button>
 
 </div>
 
@@ -139,7 +143,15 @@
     const otp = document.getElementById("otp").value;
 
     if(phone === allowedPhone && otp === otpCode){
+
+      // hide all
+      document.getElementById("login").style.display = "none";
+      document.getElementById("adminLogin").style.display = "none";
+      document.getElementById("adminPanel").style.display = "none";
+
+      // show user dashboard
       document.getElementById("dashboard").style.display = "block";
+
     } else {
       alert("Wrong details ❌");
     }
@@ -150,8 +162,15 @@
     const pass = document.getElementById("adminPass").value;
 
     if(email === adminEmailFixed && pass === adminPasswordFixed){
+
+      // hide all
+      document.getElementById("login").style.display = "none";
+      document.getElementById("adminLogin").style.display = "none";
+      document.getElementById("dashboard").style.display = "none";
+
+      // show admin panel
       document.getElementById("adminPanel").style.display = "block";
-      alert("Admin Login Success 👑");
+
     } else {
       alert("Wrong Admin Login ❌");
     }
@@ -160,6 +179,10 @@
   function changeText(){
     const text = document.getElementById("newText").value;
     document.getElementById("welcomeText").innerText = text;
+  }
+
+  function logout(){
+    location.reload();
   }
 </script>
 
