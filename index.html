@@ -1,185 +1,159 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aditya Gamer</title>
+  <title>AdityaGamerYT 🔥</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(45deg, red, blue, purple, cyan);
+      background-size: 400% 400%;
+      animation: bg 8s infinite;
+      color: white;
+      text-align: center;
+    }
 
-body {
-  margin: 0;
-  font-family: 'Orbitron', sans-serif;
-  color: white;
-  text-align: center;
-  background: url("https://images.unsplash.com/photo-1605902711622-cfb43c4437d1") no-repeat center/cover;
-}
+    @keyframes bg {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
 
-/* DARK OVERLAY */
-body::before {
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
-  top:0;
-  left:0;
-}
+    h1 {
+      margin-top: 30px;
+      text-shadow: 0 0 20px black;
+    }
 
-/* CONTENT FIX */
-body * {
-  position: relative;
-  z-index: 1;
-}
+    .welcome {
+      font-size: 28px;
+      margin-top: 20px;
+      color: yellow;
+      text-shadow: 0 0 10px black;
+    }
 
-/* TITLE */
-h1 {
-  margin-top: 30px;
-  text-shadow: 0 0 10px red, 0 0 30px red;
-}
+    .subtext {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
 
-/* CARD */
-#auth, #dashboard {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
-  padding: 25px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 350px;
-  margin: 30px auto;
-  box-shadow: 0 0 30px rgba(255,255,255,0.2);
-}
+    input {
+      padding: 12px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 200px;
+    }
 
-/* INPUT */
-input {
-  padding: 12px;
-  margin: 8px;
-  border-radius: 8px;
-  border: none;
-  width: 90%;
-}
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      background: black;
+      color: lime;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-/* BUTTON */
-.btn {
-  padding: 12px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    button:hover {
+      background: lime;
+      color: black;
+      transform: scale(1.1);
+    }
 
-.yt {background:red;}
-.insta {background:purple;}
+    #dashboard {
+      display: none;
+      margin-top: 40px;
+    }
 
-.btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px white;
-}
-</style>
+    .card {
+      background: rgba(0,0,0,0.6);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+      width: 260px;
+      box-shadow: 0 0 20px black;
+    }
+  </style>
 </head>
 
 <body>
 
 <h1>🔥 AdityaGamerYT 🔥</h1>
-<p>🎮 Minecraft Player</p>
 
-<div id="auth">
+<div id="login">
+  <input type="text" id="phone" placeholder="+91XXXXXXXXXX"><br>
+  <div id="recaptcha-container"></div>
+  <button onclick="sendOTP()">Send OTP</button><br>
+  <input type="text" id="otp" placeholder="Enter OTP"><br>
+  <button onclick="verifyOTP()">Login</button>
+</div>
 
-<input type="text" id="name" placeholder="Full Name"><br>
-<input type="email" id="email" placeholder="Email"><br>
-<input type="password" id="password" placeholder="Password"><br>
+<!-- DASHBOARD -->
+<div id="dashboard">
 
-<button class="btn yt" onclick="register()">Register</button>
-<button class="btn insta" onclick="login()">Login</button>
+  <div class="welcome">🔥 Welcome to AdityaGamerYT 🔥</div>
+  <div class="subtext">👉 Follow on Instagram & Subscribe on YouTube 👇</div>
 
-<br><br>
+  <div class="card">
+    <h3>📸 Instagram</h3>
+    <a href="https://instagram.com/_btwitsadityagg" target="_blank">
+      <button>😎 Follow Now</button>
+    </a>
+  </div>
 
-<div id="recaptcha-container"></div>
-
-<input type="text" id="phone" placeholder="Phone Number"><br>
-<button class="btn yt" onclick="sendOTP()">Send OTP</button><br>
-
-<input type="text" id="otp" placeholder="Enter OTP"><br>
-<button class="btn insta" onclick="verifyOTP()">Verify OTP</button>
+  <div class="card">
+    <h3>📺 YouTube</h3>
+    <a href="https://www.youtube.com/@AdityaGamerYT-s-3p" target="_blank">
+      <button>🔥 Subscribe Now</button>
+    </a>
+  </div>
 
 </div>
 
-<div id="dashboard" style="display:none;">
-<h2>Welcome 🎉</h2>
-<p id="user"></p>
-<button class="btn yt" onclick="logout()">Logout</button>
-</div>
-
-<!-- FIREBASE (WORKING VERSION) -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
 <script>
-const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-};
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    appId: "YOUR_APP_ID"
+  };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+  firebase.initializeApp(firebaseConfig);
 
-// Recaptcha
-window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-  'recaptcha-container', {size:'normal'}
-);
+  const auth = firebase.auth();
 
-// REGISTER
-function register(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 
-  auth.createUserWithEmailAndPassword(email, password)
-  .then(()=> alert("✅ Registered"))
-  .catch(err => alert(err.message));
-}
+  function sendOTP(){
+    const phoneNumber = document.getElementById("phone").value;
 
-// LOGIN
-function login(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+    auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+      .then(function(confirmationResult){
+        window.confirmationResult = confirmationResult;
+        alert("OTP Sent 🔥");
+      }).catch(function(error){
+        alert(error.message);
+      });
+  }
 
-  auth.signInWithEmailAndPassword(email, password)
-  .then((userCred)=>{
-    document.getElementById("auth").style.display="none";
-    document.getElementById("dashboard").style.display="block";
-    document.getElementById("user").innerText = userCred.user.email;
-  })
-  .catch(err => alert(err.message));
-}
+  function verifyOTP(){
+    const code = document.getElementById("otp").value;
 
-// SEND OTP
-function sendOTP(){
-  const phone = document.getElementById("phone").value;
-
-  auth.signInWithPhoneNumber("+91"+phone, recaptchaVerifier)
-  .then(res=>{
-    window.confirmationResult = res;
-    alert("📩 OTP Sent");
-  })
-  .catch(err => alert(err.message));
-}
-
-// VERIFY OTP
-function verifyOTP(){
-  const otp = document.getElementById("otp").value;
-
-  confirmationResult.confirm(otp)
-  .then(()=> alert("✅ Phone Verified"))
-  .catch(err => alert(err.message));
-}
-
-// LOGOUT
-function logout(){
-  auth.signOut().then(()=> location.reload());
-}
+    confirmationResult.confirm(code)
+      .then(function(result){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+      }).catch(function(error){
+        alert("Wrong OTP ❌");
+      });
+  }
 </script>
 
 </body>
