@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AdityaGamerYT 🔥 Next Level</title>
+  <title>AdityaGamerYT 🔥 Full Dashboard</title>
 
   <style>
     /* ---------------- BODY & VIDEO BACKGROUND ---------------- */
@@ -25,8 +25,8 @@
       filter: brightness(0.5);
     }
 
-    /* ---------------- DASHBOARD ---------------- */
-    #dashboard {
+    /* ---------------- DASHBOARD & ADMIN ---------------- */
+    #dashboard, #adminPanel {
       display:none;
       position:relative;
       z-index:1;
@@ -78,6 +78,13 @@
       z-index:1;
       padding:20px;
     }
+
+    /* ---------------- ADMIN PANEL BACKGROUND ---------------- */
+    #adminPanel {
+      background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url('https://iili.io/qw42EIs.jpg') no-repeat center center/cover;
+    }
   </style>
 
   <!-- LOTTIE ANIMATION -->
@@ -86,23 +93,30 @@
 
 <body>
 
-<h1>🔥 AdityaGamerYT 🔥 Next Level</h1>
+<h1>🔥 AdityaGamerYT 🔥 Full Dashboard</h1>
 
 <!-- VIDEO BACKGROUND -->
 <video autoplay muted loop id="bgVideo">
   <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
 </video>
 
-<!-- USER LOGIN -->
+<!-- LOGIN -->
 <div id="login">
-  <h2>User Login 🔐</h2>
+  <h2>User / Admin Login 🔐</h2>
+
+  <p><b>User Login:</b></p>
   <input type="text" id="phone" placeholder="Enter Phone Number"><br>
   <button onclick="fakeOTP()">Send OTP</button><br>
   <input type="text" id="otp" placeholder="Enter OTP"><br>
-  <button onclick="login()">Login</button>
+
+  <p><b>Admin Login:</b></p>
+  <input type="text" id="adminEmail" placeholder="Enter Gmail"><br>
+  <input type="password" id="adminPass" placeholder="Enter Password"><br>
+
+  <button onclick="loginBoth()">Login</button>
 </div>
 
-<!-- DASHBOARD -->
+<!-- NEXT LEVEL USER DASHBOARD -->
 <div id="dashboard">
 
   <!-- Welcome + GIF + Clock -->
@@ -157,10 +171,32 @@
 
 </div>
 
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+
+  <h2>👑 Admin Panel</h2>
+
+  <!-- GIF -->
+  <div class="card">
+    <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
+         style="width:100%; border-radius:20px;">
+  </div>
+
+  <h3>Change Welcome Text</h3>
+  <input type="text" id="newText" placeholder="New Text">
+  <button onclick="changeText()">Update</button>
+
+  <button onclick="logout()">🔄 Logout</button>
+
+</div>
+
 <script>
   /* ---------------- LOGIN ---------------- */
   const allowedPhone = "8872529805";
   const otpCode = "2013";
+
+  const adminEmailFixed = "admin@gmail.com";
+  const adminPasswordFixed = "admin2013";
 
   function fakeOTP(){
     const phone = document.getElementById("phone").value;
@@ -171,16 +207,31 @@
     }
   }
 
-  function login(){
+  function loginBoth(){
     const phone = document.getElementById("phone").value;
     const otp = document.getElementById("otp").value;
+
+    const email = document.getElementById("adminEmail").value;
+    const pass = document.getElementById("adminPass").value;
+
+    // ADMIN LOGIN
+    if(email === adminEmailFixed && pass === adminPasswordFixed){
+      document.getElementById("login").style.display = "none";
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("adminPanel").style.display = "block";
+      return;
+    }
+
+    // USER LOGIN
     if(phone === allowedPhone && otp === otpCode){
       document.getElementById("login").style.display = "none";
+      document.getElementById("adminPanel").style.display = "none";
       document.getElementById("dashboard").style.display = "block";
       document.getElementById("userNumber").innerText = "📱 Number: " + phone;
-    } else {
-      alert("Wrong details ❌");
+      return;
     }
+
+    alert("Wrong details ❌");
   }
 
   function logout(){
@@ -223,6 +274,12 @@
   function copyIP(){
     navigator.clipboard.writeText("play.yourserver.com");
     alert("IP Copied ✅");
+  }
+
+  /* ---------------- CHANGE WELCOME TEXT (ADMIN) ---------------- */
+  function changeText(){
+    const text = document.getElementById("newText").value;
+    document.getElementById("greeting").innerText = text;
   }
 </script>
 
