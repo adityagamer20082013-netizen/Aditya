@@ -1,151 +1,169 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AdityaGamerYT 🔥</title>
+  <title>AdityaGamerYT 🔥 Next Level</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(45deg, red, blue, purple, cyan);
-      background-size: 400% 400%;
-      animation: bg 8s infinite;
+    /* ---------------- BODY & VIDEO BACKGROUND ---------------- */
+    body, html {
+      margin:0;
+      padding:0;
+      font-family: Arial, sans-serif;
+      overflow-x:hidden;
       color: white;
-      text-align: center;
+      text-align:center;
     }
 
-    @keyframes bg {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    #bgVideo {
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
+      filter: brightness(0.5);
     }
 
-    input {
-      padding: 12px;
-      margin: 10px;
-      border-radius: 10px;
-      border: none;
-      width: 230px;
-    }
-
-    button {
-      padding: 12px 20px;
-      margin: 10px;
-      border: none;
-      border-radius: 10px;
-      background: black;
-      color: lime;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: lime;
-      color: black;
-      transform: scale(1.1);
-    }
-
+    /* ---------------- DASHBOARD ---------------- */
     #dashboard {
-      display: none;
-      margin-top: 30px;
-    }
-
-    /* 🔥 ADMIN PANEL WITH YOUR IMAGE */
-    #adminPanel {
-      display: none;
-      margin-top: 30px;
-      padding: 20px;
-      border-radius: 20px;
-      background:
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url('https://iili.io/qw42EIs.jpg') no-repeat center center/cover;
+      display:none;
+      position:relative;
+      z-index:1;
+      padding:20px;
     }
 
     .card {
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.5);
       margin: 20px auto;
       padding: 20px;
       border-radius: 20px;
-      width: 260px;
+      width: 280px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #42e695, 0 0 40px #7873f5;
+    }
+
+    /* ---------------- BUTTONS ---------------- */
+    button {
+      background: linear-gradient(45deg, #ff6ec4, #7873f5, #42e695);
+      color: white;
+      border-radius: 12px;
+      border:none;
+      padding:12px 20px;
+      font-weight:bold;
+      cursor:pointer;
+      margin:10px;
+      transition:0.3s;
+      box-shadow:0 0 5px #fff;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      opacity:0.9;
+      box-shadow:0 0 15px #ff6ec4, 0 0 20px #42e695;
+    }
+
+    h2, h3 {
+      text-shadow: 0 0 15px #000;
+    }
+
+    /* ---------------- LOGIN ---------------- */
+    #login {
+      position:relative;
+      z-index:1;
+      padding:20px;
     }
   </style>
+
+  <!-- LOTTIE ANIMATION -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 
 <body>
 
-<h1>🔥 AdityaGamerYT 🔥</h1>
+<h1>🔥 AdityaGamerYT 🔥 Next Level</h1>
+
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop id="bgVideo">
+  <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+</video>
 
 <!-- USER LOGIN -->
 <div id="login">
   <h2>User Login 🔐</h2>
-
   <input type="text" id="phone" placeholder="Enter Phone Number"><br>
   <button onclick="fakeOTP()">Send OTP</button><br>
   <input type="text" id="otp" placeholder="Enter OTP"><br>
   <button onclick="login()">Login</button>
 </div>
 
-<!-- ADMIN LOGIN -->
-<div id="adminLogin">
-  <h2>Admin Login 👑</h2>
-
-  <input type="text" id="adminEmail" placeholder="Enter Gmail"><br>
-  <input type="password" id="adminPass" placeholder="Enter Password"><br>
-  <button onclick="adminLogin()">Login Admin</button>
-</div>
-
-<!-- USER DASHBOARD -->
+<!-- DASHBOARD -->
 <div id="dashboard">
 
-  <h2 id="welcomeText">🔥 Welcome to AdityaGamerYT 🔥</h2>
-  <p>👉 Follow & Subscribe 😎🔥</p>
-
+  <!-- Welcome + GIF + Clock -->
   <div class="card">
+    <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_tfb3estd.json"
+                   background="transparent" speed="1"
+                   style="width:200px; height:200px; margin:auto;" loop autoplay>
+    </lottie-player>
+    <h3 id="greeting">👋 Hello Gamer</h3>
+    <p id="time">⏰ Time: </p>
+  </div>
+
+  <!-- User Info -->
+  <div class="card">
+    <h3>👤 Your Info</h3>
+    <p id="userNumber">📱 Number: </p>
+  </div>
+
+  <!-- Social Buttons -->
+  <div class="card">
+    <h3>📸 Instagram</h3>
     <a href="https://instagram.com/_btwitsadityagg" target="_blank">
-      <button>📸 Instagram</button>
+      <button>😎 Follow Now</button>
     </a>
   </div>
 
   <div class="card">
+    <h3>📺 YouTube</h3>
     <a href="https://www.youtube.com/@AdityaGamerYT-s-3p" target="_blank">
-      <button>📺 YouTube</button>
+      <button>🔥 Subscribe Now</button>
     </a>
   </div>
 
-  <button onclick="logout()">🔄 Logout</button>
-
-</div>
-
-<!-- ADMIN PANEL -->
-<div id="adminPanel">
-
-  <h2>👑 Admin Panel</h2>
-
-  <!-- GIF -->
+  <!-- Minecraft Section -->
   <div class="card">
-    <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
-         style="width:100%; border-radius:20px;">
+    <h3>🎮 Minecraft Server</h3>
+    <img src="https://media.giphy.com/media/l0HlQ7LRal8nE2pGk/giphy.gif" style="width:100%; border-radius:15px;">
+    <p>Server: GLAXY HOST</p>
+    <p>IP: play.yourserver.com</p>
+    <button onclick="copyIP()">📋 Copy IP</button>
   </div>
 
-  <h3>Change Welcome Text</h3>
-  <input type="text" id="newText" placeholder="New Text">
-  <button onclick="changeText()">Update</button>
+  <!-- XP / Level -->
+  <div class="card">
+    <h3>🎮 Player Stats</h3>
+    <p>Level: <span id="level">1</span></p>
+    <p>XP: <span id="xp">0</span>/100</p>
+    <button onclick="gainXP()">🔥 Gain XP</button>
+  </div>
 
   <button onclick="logout()">🔄 Logout</button>
 
 </div>
 
 <script>
+  /* ---------------- LOGIN ---------------- */
   const allowedPhone = "8872529805";
   const otpCode = "2013";
 
-  const adminEmailFixed = "admin@gmail.com";
-  const adminPasswordFixed = "admin2013";
-
   function fakeOTP(){
     const phone = document.getElementById("phone").value;
-
     if(phone === allowedPhone){
       alert("OTP Sent 📱 (Code: 2013)");
     } else {
@@ -156,40 +174,55 @@
   function login(){
     const phone = document.getElementById("phone").value;
     const otp = document.getElementById("otp").value;
-
     if(phone === allowedPhone && otp === otpCode){
       document.getElementById("login").style.display = "none";
-      document.getElementById("adminLogin").style.display = "none";
-      document.getElementById("adminPanel").style.display = "none";
-
       document.getElementById("dashboard").style.display = "block";
+      document.getElementById("userNumber").innerText = "📱 Number: " + phone;
     } else {
       alert("Wrong details ❌");
     }
   }
 
-  function adminLogin(){
-    const email = document.getElementById("adminEmail").value;
-    const pass = document.getElementById("adminPass").value;
-
-    if(email === adminEmailFixed && pass === adminPasswordFixed){
-      document.getElementById("login").style.display = "none";
-      document.getElementById("adminLogin").style.display = "none";
-      document.getElementById("dashboard").style.display = "none";
-
-      document.getElementById("adminPanel").style.display = "block";
-    } else {
-      alert("Wrong Admin Login ❌");
-    }
-  }
-
-  function changeText(){
-    const text = document.getElementById("newText").value;
-    document.getElementById("welcomeText").innerText = text;
-  }
-
   function logout(){
     location.reload();
+  }
+
+  /* ---------------- CLOCK + GREETING ---------------- */
+  function updateTime(){
+    const now = new Date();
+    const time = now.toLocaleTimeString();
+    document.getElementById("time").innerText = "⏰ Time: " + time;
+
+    let hour = now.getHours();
+    let greet = "👋 Hello";
+
+    if(hour < 12) greet = "🌅 Good Morning";
+    else if(hour < 18) greet = "☀️ Good Afternoon";
+    else greet = "🌙 Good Evening";
+
+    document.getElementById("greeting").innerText = greet + " Gamer 😎";
+  }
+  setInterval(updateTime, 1000);
+
+  /* ---------------- XP / LEVEL ---------------- */
+  let xp = 0;
+  let level = 1;
+
+  function gainXP(){
+    xp += 10;
+    if(xp >= 100){
+      xp = 0;
+      level++;
+      alert("Level Up! 🎉");
+    }
+    document.getElementById("xp").innerText = xp;
+    document.getElementById("level").innerText = level;
+  }
+
+  /* ---------------- COPY MINECRAFT IP ---------------- */
+  function copyIP(){
+    navigator.clipboard.writeText("play.yourserver.com");
+    alert("IP Copied ✅");
   }
 </script>
 
