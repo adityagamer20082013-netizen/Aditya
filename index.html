@@ -5,28 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AdityaGamerYT Dashboard</title>
 <style>
-html, body { margin:0; padding:0; font-family:sans-serif; background:#000; color:#fff; text-align:center; overflow-x:hidden; }
-h1 { margin:20px 0; }
+html, body { margin:0; padding:0; font-family:sans-serif; overflow-x:hidden; }
+h1 { margin:20px 0; color:#fff; text-align:center; }
+
+/* Fullscreen background video for user */
 #userBgVideo {
   position:fixed; top:0; left:0; width:100%; height:100%;
-  object-fit:cover; z-index:-2; filter:brightness(0.4);
+  object-fit:cover; z-index:-2;
 }
-#login, #dashboard, #adminPanel { padding:20px; }
-.card { background:rgba(0,0,0,0.5); margin:15px auto; padding:20px; border-radius:15px; width:300px; }
-button { padding:10px 20px; margin:8px; border:none; border-radius:10px; background:linear-gradient(45deg,#42e695,#7873f5); color:white; cursor:pointer; }
+
+/* Panels */
+#login, #dashboard, #adminPanel { padding:20px; position:relative; z-index:1; }
+
+/* Card style */
+.card {
+  background: rgba(0,0,0,0.5);
+  margin:15px auto;
+  padding:20px;
+  border-radius:15px;
+  width:320px;
+  box-shadow: 0 0 15px #fff;
+}
+button {
+  padding:10px 20px;
+  margin:8px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(45deg,#42e695,#7873f5);
+  color:white;
+  cursor:pointer;
+}
 button:hover { opacity:0.9; }
+
+/* XP bar */
+#xpBarContainer { width:100%; height:20px; background:rgba(255,255,255,0.2); border-radius:12px; overflow:hidden; margin-top:10px; }
+#xpBar { width:0%; height:100%; border-radius:12px; background:linear-gradient(90deg,#42e695,#7873f5); transition:width 0.5s; position:relative; }
+
+/* Sparkles & confetti */
+.sparkle { position:absolute; width:4px; height:4px; border-radius:50%; background:white; opacity:0.7; pointer-events:none; animation:sparkleAnim 0.8s linear infinite; }
+@keyframes sparkleAnim { 0%{transform:translate(0,0) scale(1); opacity:1;} 50%{transform:translate(4px,-4px) scale(0.5); opacity:0.5;} 100%{transform:translate(0,0) scale(1); opacity:1;} }
+.confetti { position:absolute; width:6px; height:6px; top:0; animation:fall 3s linear forwards; }
+@keyframes fall {0%{top:-10px;opacity:1;}100%{top:100%;opacity:0;}}
+
+/* Input */
+input { padding:10px; border-radius:8px; border:none; margin:5px; width:80%; text-align:center; }
+
+/* Social links */
+.social-btn { display:inline-block; width:140px; }
+
+/* Particles */
+#particleCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
 </style>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
 
 <h1>AdityaGamerYT Dashboard 🌧️</h1>
 
-<!-- Video background only for users -->
+<!-- User background video -->
 <video autoplay muted loop id="userBgVideo" style="display:none;">
   <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
 </video>
 
-<!-- Login Panel -->
+<!-- Login panel -->
 <div id="login">
   <div class="card">
     <h3>User Login</h3>
@@ -42,16 +83,50 @@ button:hover { opacity:0.9; }
   </div>
 </div>
 
-<!-- User Dashboard -->
+<!-- User dashboard -->
 <div id="dashboard" style="display:none;">
   <div class="card">
-    <h3>Welcome User 🌧️</h3>
-    <p>This is your dashboard with background video!</p>
+    <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_tfb3estd.json" background="transparent" speed="1" style="width:180px;height:180px;margin:auto;" loop autoplay></lottie-player>
+    <h3 id="greeting">👋 Hello Gamer</h3>
+    <p id="time">⏰ Time:</p>
   </div>
-  <button onclick="logout()">Logout</button>
+
+  <div class="card">
+    <h3>👤 Your Info</h3>
+    <p id="userNumber">📱 Number:</p>
+  </div>
+
+  <div class="card">
+    <h3>🎮 Minecraft Server</h3>
+    <img src="https://media.giphy.com/media/l0HlQ7LRal8nE2pGk/giphy.gif" style="width:100%;border-radius:15px;">
+    <p>Server: GLAXY HOST</p>
+    <p>IP: play.adityamc.fun</p>
+    <button onclick="copyIP()">📋 Copy IP</button>
+  </div>
+
+  <div class="card">
+    <h3>📸 Social Links</h3>
+    <a class="social-btn" href="https://instagram.com/_btwitsadityagg" target="_blank"><button>😎 Instagram</button></a>
+    <a class="social-btn" href="https://www.youtube.com/@AdityaGamerYT-s-3p" target="_blank"><button>🔥 YouTube</button></a>
+  </div>
+
+  <div class="card">
+    <h3>🎮 Player Stats</h3>
+    <p>Level: <span id="level">1</span></p>
+    <p>XP: <span id="xp">0</span>/100</p>
+    <div id="xpBarContainer"><div id="xpBar"></div></div>
+    <button onclick="gainXP()">🔥 Gain XP</button>
+  </div>
+
+  <div class="card">
+    <h3>🌐 Open Live Link</h3>
+    <button onclick="openLiveLink()">Open Live Link</button>
+  </div>
+
+  <button onclick="logout()">🔄 Logout</button>
 </div>
 
-<!-- Admin Panel -->
+<!-- Admin panel -->
 <div id="adminPanel" style="display:none;">
   <div class="card">
     <h3>Welcome Admin 👑</h3>
@@ -72,7 +147,10 @@ function loginUser(){
   if(phone===allowedPhone && otp===otpCode){
     document.getElementById("login").style.display="none";
     document.getElementById("dashboard").style.display="block";
-    document.getElementById("userBgVideo").style.display="block"; // show video for user
+    document.getElementById("userBgVideo").style.display="block"; // show video
+    document.getElementById("userBgVideo").play();
+    document.getElementById("adminPanel").style.display="none";
+    document.body.style.background="none"; // remove black
   } else { alert("Wrong user credentials!"); }
 }
 
@@ -82,13 +160,61 @@ function loginAdmin(){
   if(email===adminEmailFixed && pass===adminPasswordFixed){
     document.getElementById("login").style.display="none";
     document.getElementById("adminPanel").style.display="block";
-    document.getElementById("userBgVideo").style.display="none"; // hide video for admin
+    document.getElementById("userBgVideo").style.display="none"; // hide video
+    document.body.style.background="#000";
   } else { alert("Wrong admin credentials!"); }
 }
 
-function logout(){
-  location.reload();
+function logout(){ location.reload(); }
+
+// Greeting & time
+function updateTime(){
+  const now=new Date();
+  document.getElementById("time").innerText="⏰ Time: "+now.toLocaleTimeString();
+  let h=now.getHours(), greet="👋 Hello";
+  if(h<12) greet="🌅 Good Morning";
+  else if(h<18) greet="☀️ Good Afternoon";
+  else greet="🌙 Good Evening";
+  document.getElementById("greeting").innerText=greet+" Gamer 😎";
 }
+setInterval(updateTime,1000);
+
+// XP bar
+let xp=0, level=1;
+function gainXP(){
+  xp+=10;
+  if(xp>=100){ xp=0; level++; alert("Level Up! 🎉"); addConfetti(); }
+  document.getElementById("xp").innerText=xp;
+  document.getElementById("level").innerText=level;
+  const xpBar=document.getElementById("xpBar"); xpBar.style.width=xp+"%";
+  for(let i=0;i<5;i++){
+    const sparkle=document.createElement("div"); sparkle.className="sparkle";
+    sparkle.style.left=Math.random()*xpBar.offsetWidth+"px";
+    sparkle.style.top=Math.random()*xpBar.offsetHeight+"px";
+    xpBar.appendChild(sparkle);
+    setTimeout(()=>{sparkle.remove();},800);
+  }
+}
+
+// Copy IP
+function copyIP(){ navigator.clipboard.writeText("play.adityamc.fun"); alert("IP Copied ✅"); }
+
+// Confetti
+function addConfetti(){ for(let i=0;i<50;i++){ const conf=document.createElement("div"); conf.className="confetti"; conf.style.left=Math.random()*window.innerWidth+"px"; conf.style.background=`hsl(${Math.random()*360},100%,50%)`; document.body.appendChild(conf); setTimeout(()=>conf.remove(),3500); } }
+
+// Live link prompt
+function openLiveLink(){
+  let url = prompt("Enter your live dashboard URL:", "https://adityagamergg2008");
+  if(url && url.trim() !== ""){ window.open(url, "_blank"); } else{ alert("No URL entered ❌"); }
+}
+
+// Particles
+const canvas=document.createElement('canvas'); canvas.id='particleCanvas'; document.body.appendChild(canvas);
+const ctx=canvas.getContext('2d'); canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+const particles=[];
+for(let i=0;i<150;i++){ particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5}); }
+function drawParticles(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle="rgba(255,255,255,0.5)"; ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0||p.x>canvas.width) p.dx*=-1; if(p.y<0||p.y>canvas.height) p.dy*=-1; }); requestAnimationFrame(drawParticles); }
+drawParticles();
 </script>
 
 </body>
