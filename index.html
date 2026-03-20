@@ -8,7 +8,7 @@
 <style>
 html,body{margin:0;padding:0;font-family:sans-serif;color:#fff;text-align:center;overflow-x:hidden}
 
-/* VIDEO */
+/* 🌧️ VIDEO */
 #userBgVideo{
 position:fixed;
 top:0;left:0;
@@ -19,7 +19,7 @@ z-index:-2;
 display:none;
 }
 
-/* RAINBOW */
+/* 🌈 RAINBOW */
 .rainbow{
 font-weight:bold;
 background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
@@ -62,9 +62,11 @@ width:80%;
 #xpBarContainer{width:100%;height:20px;background:rgba(255,255,255,0.2);border-radius:10px}
 #xpBar{height:100%;width:0%;background:linear-gradient(90deg,#42e695,#7873f5)}
 
-/* EFFECTS */
+/* SPARKLE */
 .sparkle{position:absolute;width:4px;height:4px;background:#fff;border-radius:50%;animation:s 0.8s}
 @keyframes s{100%{opacity:0}}
+
+/* CONFETTI */
 .confetti{position:absolute;width:6px;height:6px;top:0;animation:f 3s}
 @keyframes f{100%{top:100%;opacity:0}}
 </style>
@@ -72,12 +74,15 @@ width:80%;
 
 <body>
 
+<!-- 🌧️ VIDEO -->
 <video autoplay muted loop id="userBgVideo">
 <source src="https://www.w3schools.com/howto/rain.mp4">
 </video>
 
+<!-- 🌈 TITLE -->
 <h1>Welcome to <span class="rainbow">Choco SMP</span></h1>
 
+<!-- LOGIN -->
 <div id="login">
 
 <div class="card">
@@ -96,6 +101,7 @@ width:80%;
 
 </div>
 
+<!-- USER DASHBOARD -->
 <div id="dashboard" style="display:none;">
 
 <div class="card">
@@ -105,11 +111,11 @@ width:80%;
 
 <div class="card">
 <h3>🎮 Choco SMP</h3>
-<p>IP: play.adityamc.fun</p>
+<p>IP: play.chocosmp.fun</p>
 <button onclick="copyIP()">Copy IP</button>
 </div>
 
-<!-- 🔥 UPDATED SOCIAL LINKS -->
+<!-- 🌐 SOCIAL -->
 <div class="card">
 <h3>🌐 Community</h3>
 
@@ -141,6 +147,7 @@ width:80%;
 <button onclick="logout()">Logout</button>
 </div>
 
+<!-- ADMIN PANEL -->
 <div id="adminPanel" style="display:none;">
 <div class="card">
 <h3>👑 Admin Panel</h3>
@@ -150,7 +157,7 @@ width:80%;
 </div>
 
 <script>
-// USER LOGIN
+// 🔐 USER LOGIN
 const userEmailFixed="chocosmp@gmail.com";
 const userPassFixed="chocosmp123";
 
@@ -159,10 +166,12 @@ if(userEmail.value===userEmailFixed && userPass.value===userPassFixed){
 login.style.display="none";
 dashboard.style.display="block";
 userBgVideo.style.display="block";
-}else alert("Wrong User ❌");
+}else{
+alert("Wrong User ❌");
+}
 }
 
-// ADMIN LOGIN
+// 👑 ADMIN LOGIN
 const adminEmailFixed="admin@gmail.com";
 const adminPassFixed="admin2013";
 
@@ -171,12 +180,15 @@ if(adminEmail.value===adminEmailFixed && adminPass.value===adminPassFixed){
 login.style.display="none";
 adminPanel.style.display="block";
 userBgVideo.style.display="none";
-}else alert("Wrong Admin ❌");
+}else{
+alert("Wrong Admin ❌");
+}
 }
 
+// 🔄 LOGOUT
 function logout(){location.reload();}
 
-// TIME
+// ⏰ TIME + GREETING
 setInterval(()=>{
 let n=new Date();
 time.innerText=n.toLocaleTimeString();
@@ -190,17 +202,27 @@ else g="🌙 Night";
 greeting.innerText=g+" Gamer 😎";
 },1000);
 
-// XP
+// ⚡ XP
 let xp=0,level=1;
 function gainXP(){
 xp+=10;
 if(xp>=100){xp=0;level++;addConfetti();}
-xpBar.style.width=xp+"%";
-xp.innerText=xp;
+document.getElementById("xp").innerText=xp;
 document.getElementById("level").innerText=level;
+document.getElementById("xpBar").style.width=xp+"%";
+
+// sparkle
+for(let i=0;i<5;i++){
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*20+"px";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),800);
+}
 }
 
-// CONFETTI
+// 🎉 CONFETTI
 function addConfetti(){
 for(let i=0;i<40;i++){
 let c=document.createElement("div");
@@ -212,13 +234,13 @@ setTimeout(()=>c.remove(),3000);
 }
 }
 
-// COPY
+// 📋 COPY IP
 function copyIP(){
-navigator.clipboard.writeText("play.adityamc.fun");
-alert("Copied ✅");
+navigator.clipboard.writeText("play.chocosmp.fun");
+alert("IP Copied: play.chocosmp.fun ✅");
 }
 
-// LINK
+// 🌐 LINK
 function openLiveLink(){
 let url=prompt("Enter link","https://adityagamergg2008");
 if(url) window.open(url);
