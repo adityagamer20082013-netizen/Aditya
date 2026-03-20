@@ -1,114 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AdityaGamerYT 🔥 Full Dashboard</title>
-
+  <title>AdityaGamerYT 🔥 Ultra Dashboard</title>
   <style>
     body, html {
-      margin:0;
-      padding:0;
+      margin:0; padding:0;
       font-family: Arial, sans-serif;
       overflow-x:hidden;
-      color: white;
+      color:white;
       text-align:center;
     }
 
     #bgVideo {
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:-2;
+      position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      object-fit:cover; z-index:-2;
       filter: brightness(0.5);
     }
 
-    #dashboard, #adminPanel {
-      display:none;
-      position:relative;
-      z-index:1;
-      padding:20px;
+    #particleCanvas {
+      position: fixed; top:0; left:0; width:100%; height:100%;
+      z-index:-1; pointer-events:none;
     }
 
+    #dashboard, #adminPanel { display:none; position:relative; z-index:1; padding:20px; }
+
     .card {
-      background: rgba(0,0,0,0.5);
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 20px;
-      width: 280px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.5); margin:20px auto; padding:20px;
+      border-radius:20px; width:280px;
+      box-shadow:0 0 20px rgba(255,255,255,0.2);
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #42e695, 0 0 40px #7873f5;
-    }
+    .card:hover { transform: scale(1.05); box-shadow: 0 0 30px #42e695,0 0 40px #7873f5; }
 
     button {
       background: linear-gradient(45deg, #ff6ec4, #7873f5, #42e695);
-      color: white;
-      border-radius: 12px;
-      border:none;
-      padding:12px 20px;
-      font-weight:bold;
-      cursor:pointer;
-      margin:10px;
-      transition:0.3s;
-      box-shadow:0 0 5px #fff;
+      color:white; border-radius:12px; border:none; padding:12px 20px;
+      font-weight:bold; cursor:pointer; margin:10px; transition:0.3s; box-shadow:0 0 5px #fff;
+    }
+    button:hover { transform:scale(1.1); opacity:0.9; box-shadow:0 0 15px #ff6ec4,0 0 20px #42e695; }
+
+    h2,h3 { text-shadow:0 0 15px #000; }
+
+    #login { position:relative; z-index:1; padding:20px; }
+
+    #adminPanel { 
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://iili.io/qw42EIs.jpg') no-repeat center center/cover; 
     }
 
-    button:hover {
-      transform: scale(1.1);
-      opacity:0.9;
-      box-shadow:0 0 15px #ff6ec4, 0 0 20px #42e695;
-    }
+    .login-section { margin-bottom:20px; padding:15px; border-radius:15px; }
+    .user-section { border:2px solid #42e695; }
+    .admin-section { border:2px solid #ff6ec4; }
 
-    h2, h3 {
-      text-shadow: 0 0 15px #000;
+    /* XP BAR */
+    #xpBarContainer {
+      width:100%; height:20px; background:rgba(255,255,255,0.2); border-radius:10px;
+      margin-top:10px; overflow:hidden;
+      box-shadow:0 0 10px #fff inset;
     }
-
-    #login {
-      position:relative;
-      z-index:1;
-      padding:20px;
+    #xpBar {
+      width:0%; height:100%; border-radius:10px;
+      background: linear-gradient(90deg,#ff6ec4,#7873f5,#42e695);
+      box-shadow:0 0 10px #ff6ec4,0 0 20px #7873f5,0 0 30px #42e695;
+      transition: width 0.5s;
+      position: relative;
     }
-
-    #adminPanel {
-      background:
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-        url('https://iili.io/qw42EIs.jpg') no-repeat center center/cover;
+    /* SPARKLES */
+    .sparkle {
+      position:absolute; width:4px; height:4px; border-radius:50%;
+      background:white; opacity:0.8; pointer-events:none;
+      animation: sparkleAnim 0.8s linear infinite;
+    }
+    @keyframes sparkleAnim {
+      0%{transform:translate(0,0) scale(1); opacity:1;}
+      50%{transform:translate(5px,-5px) scale(0.5); opacity:0.5;}
+      100%{transform:translate(0,0) scale(1); opacity:1;}
     }
   </style>
 
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
-
 <body>
 
-<h1>🔥 AdityaGamerYT 🔥 Full Dashboard</h1>
+<h1>🔥 AdityaGamerYT 🔥 Ultra Dashboard</h1>
 
 <video autoplay muted loop id="bgVideo">
   <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
 </video>
 
+<canvas id="particleCanvas"></canvas>
+
+<!-- YOUTUBE BACKGROUND MUSIC -->
+<iframe id="bgMusicYT" width="0" height="0" src="https://www.youtube.com/embed/m2pAAs_lpWg?autoplay=1&loop=1&playlist=m2pAAs_lpWg" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+
+<!-- LOGIN -->
 <div id="login">
   <h2>User / Admin Login 🔐</h2>
 
-  <p><b>User Login:</b></p>
-  <input type="text" id="phone" placeholder="Enter Phone Number"><br>
-  <button onclick="fakeOTP()">Send OTP</button><br>
-  <input type="text" id="otp" placeholder="Enter OTP"><br>
+  <div class="login-section user-section">
+    <h3>User Login 📱</h3>
+    <input type="text" id="phone" placeholder="Enter Phone Number"><br>
+    <button onclick="fakeOTP()">Send OTP</button><br>
+    <input type="text" id="otp" placeholder="Enter OTP"><br>
+    <button onclick="loginUser()">Login as User</button>
+  </div>
 
-  <p><b>Admin Login:</b></p>
-  <input type="text" id="adminEmail" placeholder="Enter Gmail"><br>
-  <input type="password" id="adminPass" placeholder="Enter Password"><br>
-
-  <button onclick="loginBoth()">Login</button>
+  <div class="login-section admin-section">
+    <h3>Admin Login 👑</h3>
+    <input type="text" id="adminEmail" placeholder="Enter Gmail"><br>
+    <input type="password" id="adminPass" placeholder="Enter Password"><br>
+    <button onclick="loginAdmin()">Login as Admin</button>
+  </div>
 </div>
 
-<!-- NEXT LEVEL USER DASHBOARD -->
+<!-- USER DASHBOARD -->
 <div id="dashboard">
 
   <div class="card">
@@ -127,23 +134,19 @@
 
   <div class="card">
     <h3>📸 Instagram</h3>
-    <a href="https://instagram.com/_btwitsadityagg" target="_blank">
-      <button>😎 Follow Now</button>
-    </a>
+    <a href="https://instagram.com/_btwitsadityagg" target="_blank"><button>😎 Follow Now</button></a>
   </div>
 
   <div class="card">
     <h3>📺 YouTube</h3>
-    <a href="https://www.youtube.com/@AdityaGamerYT-s-3p" target="_blank">
-      <button>🔥 Subscribe Now</button>
-    </a>
+    <a href="https://www.youtube.com/@AdityaGamerYT-s-3p" target="_blank"><button>🔥 Subscribe Now</button></a>
   </div>
 
   <div class="card">
     <h3>🎮 Minecraft Server</h3>
     <img src="https://media.giphy.com/media/l0HlQ7LRal8nE2pGk/giphy.gif" style="width:100%; border-radius:15px;">
     <p>Server: GLAXY HOST</p>
-    <p>IP: play.yourserver.com</p>
+    <p>IP: play.adityamc.fun</p>
     <button onclick="copyIP()">📋 Copy IP</button>
   </div>
 
@@ -151,114 +154,109 @@
     <h3>🎮 Player Stats</h3>
     <p>Level: <span id="level">1</span></p>
     <p>XP: <span id="xp">0</span>/100</p>
+    <div id="xpBarContainer"><div id="xpBar"></div></div>
     <button onclick="gainXP()">🔥 Gain XP</button>
   </div>
 
   <button onclick="logout()">🔄 Logout</button>
-
 </div>
 
 <!-- ADMIN PANEL -->
 <div id="adminPanel">
-
   <h2>👑 Admin Panel</h2>
-
   <div class="card">
-    <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
-         style="width:100%; border-radius:20px;">
+    <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" style="width:100%; border-radius:20px;">
   </div>
-
   <h3>Change Welcome Text</h3>
   <input type="text" id="newText" placeholder="New Text">
   <button onclick="changeText()">Update</button>
-
   <button onclick="logout()">🔄 Logout</button>
-
 </div>
 
 <script>
-  const allowedPhone = "7696044754"; // NEW NUMBER
+  const allowedPhone = "7696044754";
   const otpCode = "2013";
-
   const adminEmailFixed = "admin@gmail.com";
   const adminPasswordFixed = "admin2013";
 
   function fakeOTP(){
     const phone = document.getElementById("phone").value;
-    if(phone === allowedPhone){
-      alert("OTP Sent 📱 (Code: 2013)");
-    } else {
-      alert("Number not allowed ❌");
-    }
+    if(phone === allowedPhone){ alert("OTP Sent 📱 (Code: 2013)"); }
+    else { alert("Number not allowed ❌"); }
   }
 
-  function loginBoth(){
+  function loginUser(){
     const phone = document.getElementById("phone").value;
     const otp = document.getElementById("otp").value;
-
-    const email = document.getElementById("adminEmail").value;
-    const pass = document.getElementById("adminPass").value;
-
-    if(email === adminEmailFixed && pass === adminPasswordFixed){
-      document.getElementById("login").style.display = "none";
-      document.getElementById("dashboard").style.display = "none";
-      document.getElementById("adminPanel").style.display = "block";
-      return;
-    }
-
     if(phone === allowedPhone && otp === otpCode){
       document.getElementById("login").style.display = "none";
-      document.getElementById("adminPanel").style.display = "none";
       document.getElementById("dashboard").style.display = "block";
-      document.getElementById("userNumber").innerText = "📱 Number: " + phone;
-      return;
-    }
-
-    alert("Wrong details ❌");
+    } else { alert("Wrong User details ❌"); }
   }
 
-  function logout(){
-    location.reload();
+  function loginAdmin(){
+    const email = document.getElementById("adminEmail").value;
+    const pass = document.getElementById("adminPass").value;
+    if(email === adminEmailFixed && pass === adminPasswordFixed){
+      document.getElementById("login").style.display = "none";
+      document.getElementById("adminPanel").style.display = "block";
+    } else { alert("Wrong Admin details ❌"); }
   }
+
+  function logout(){ location.reload(); }
 
   function updateTime(){
     const now = new Date();
-    const time = now.toLocaleTimeString();
-    document.getElementById("time").innerText = "⏰ Time: " + time;
-
-    let hour = now.getHours();
-    let greet = "👋 Hello";
-    if(hour < 12) greet = "🌅 Good Morning";
-    else if(hour < 18) greet = "☀️ Good Afternoon";
-    else greet = "🌙 Good Evening";
-
+    document.getElementById("time").innerText = "⏰ Time: " + now.toLocaleTimeString();
+    let h = now.getHours(), greet="👋 Hello";
+    if(h<12) greet="🌅 Good Morning"; else if(h<18) greet="☀️ Good Afternoon"; else greet="🌙 Good Evening";
     document.getElementById("greeting").innerText = greet + " Gamer 😎";
   }
   setInterval(updateTime, 1000);
 
-  let xp = 0;
-  let level = 1;
-
+  let xp = 0, level=1;
   function gainXP(){
     xp += 10;
-    if(xp >= 100){
-      xp = 0;
-      level++;
-      alert("Level Up! 🎉");
-    }
+    if(xp>=100){ xp=0; level++; alert("Level Up! 🎉"); }
     document.getElementById("xp").innerText = xp;
     document.getElementById("level").innerText = level;
+
+    // Animate XP bar with sparkle
+    const xpBar=document.getElementById("xpBar");
+    xpBar.style.width=xp+"%";
+
+    // Add sparkles
+    for(let i=0;i<5;i++){
+      const sparkle=document.createElement("div");
+      sparkle.className="sparkle";
+      sparkle.style.left=Math.random()*xpBar.offsetWidth+"px";
+      sparkle.style.top=Math.random()*xpBar.offsetHeight+"px";
+      xpBar.appendChild(sparkle);
+      setTimeout(()=>{ sparkle.remove(); },800);
+    }
   }
 
-  function copyIP(){
-    navigator.clipboard.writeText("play.yourserver.com");
-    alert("IP Copied ✅");
-  }
+  function copyIP(){ navigator.clipboard.writeText("play.adityamc.fun"); alert("IP Copied ✅"); }
 
-  function changeText(){
-    const text = document.getElementById("newText").value;
-    document.getElementById("greeting").innerText = text;
+  function changeText(){ document.getElementById("greeting").innerText = document.getElementById("newText").value; }
+
+  const canvas=document.getElementById('particleCanvas'), ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  const particles=[];
+  for(let i=0;i<100;i++){
+    particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, dx:(Math.random()-0.5)*0.5, dy:(Math.random()-0.5)*0.5});
   }
+  function drawParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle="rgba(255,255,255,0.8)"; ctx.fill();
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0||p.x>canvas.width)p.dx*=-1;
+      if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
 </script>
 
 </body>
