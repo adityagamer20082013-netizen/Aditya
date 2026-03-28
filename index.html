@@ -11,54 +11,66 @@
 body{
 background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
-text-align:center;
 }
 
 /* LOGIN */
 #loginPage{
 height:100vh;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
+flex-direction:column;
 }
 
-/* CONTAINER (COMPACT) */
-.container{
-margin-top:70px;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:15px;
+/* SIDEBAR */
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:200px;
+height:100%;
+background:rgba(0,0,0,0.8);
+padding-top:20px;
+display:none;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.sidebar a{
+display:block;
+padding:12px;
+color:white;
+text-decoration:none;
+}
+
+.sidebar a:hover{
+background:#00ffcc;
+color:black;
+}
+
+/* MAIN */
+.main{
+margin-left:210px;
+padding:20px;
+display:none;
 }
 
 /* CARD */
 .card{
 background:rgba(255,255,255,0.08);
 padding:15px;
+margin:10px;
 border-radius:15px;
-width:300px;
 backdrop-filter:blur(10px);
-box-shadow:0 0 15px rgba(0,0,0,0.5);
-}
-
-/* NAV */
-nav{
-position:fixed;
-top:0;
-width:100%;
-background:rgba(0,0,0,0.6);
-padding:10px;
-display:flex;
-justify-content:space-between;
-align-items:center;
 }
 
 /* INPUT */
 input{
 padding:10px;
 margin:5px;
-width:90%;
 border:none;
 border-radius:8px;
 }
@@ -66,7 +78,7 @@ border-radius:8px;
 /* BUTTON */
 button{
 padding:10px 20px;
-margin:8px;
+margin:5px;
 border:none;
 border-radius:10px;
 background:linear-gradient(45deg,#42e695,#7873f5);
@@ -104,41 +116,46 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 </div>
 </div>
 
-<!-- MAIN SITE -->
-<div id="mainSite" style="display:none;">
-
-<nav>
-<span class="rainbow">Choco SMP</span>
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+<h2 class="rainbow">Choco SMP</h2>
+<a href="#" onclick="showPage('home')">Home</a>
+<a href="#" onclick="showPage('server')">Server</a>
+<a href="#" onclick="showPage('community')">Community</a>
 <button onclick="logout()">Logout</button>
-</nav>
+</div>
 
-<div class="container">
+<!-- MAIN -->
+<div class="main" id="main">
 
-<!-- HOME -->
-<div class="card">
-<h2>Welcome to <span class="rainbow">Choco SMP</span></h2>
-<h3 id="greeting"></h3>
+<!-- USER PAGES -->
+<div id="home" class="card">
+<h2>Welcome Gamer 😎</h2>
 <p id="time"></p>
 </div>
 
-<!-- SERVER -->
-<div class="card">
-<h3>🎮 Server</h3>
+<div id="server" class="card" style="display:none;">
+<h2>🎮 Server</h2>
 <p>IP: play.chocosmp.fun</p>
 <button onclick="copyIP()">Copy IP</button>
 </div>
 
-<!-- COMMUNITY -->
-<div class="card">
-<h3>🌐 Community</h3>
-
+<div id="community" class="card" style="display:none;">
+<h2>🌐 Community</h2>
 <a href="https://discord.gg/dNhUUsaz75"><button>Discord</button></a>
 <a href="https://www.youtube.com/channel/UCMhd7jqZzvhtqrkVOqgrmKg"><button>YouTube</button></a>
 <a href="https://www.instagram.com/edit_with_awais/"><button>Instagram</button></a>
-
 </div>
 
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="card" style="display:none;">
+<h2>👑 Admin Panel</h2>
+<p>Server Controls</p>
+<button>Start Server</button>
+<button>Stop Server</button>
+<button>Restart Server</button>
 </div>
+
 </div>
 
 <script>
@@ -147,53 +164,57 @@ const userE="chocosmp@gmail.com";
 const userP="chocosmp123";
 
 const adminE="admin@gmail.com";
-const adminP="admin123";
+const adminP="admin2013";
 
-// LOGIN
+// LOGIN USER
 function loginUser(){
 if(userEmail.value===userE && userPass.value===userP){
-localStorage.setItem("login","user");
-showSite();
-}else alert("Wrong User ❌");
+loginPage.style.display="none";
+sidebar.style.display="block";
+main.style.display="block";
+showPage("home");
+}
+else alert("Wrong User ❌");
 }
 
+// LOGIN ADMIN
 function loginAdmin(){
 if(adminEmail.value===adminE && adminPass.value===adminP){
-localStorage.setItem("login","admin");
-showSite();
-}else alert("Wrong Admin ❌");
-}
-
-// SHOW SITE
-function showSite(){
 loginPage.style.display="none";
-mainSite.style.display="block";
+sidebar.style.display="block";
+main.style.display="block";
+
+hideAll();
+adminPanel.style.display="block";
+}
+else alert("Wrong Admin ❌");
 }
 
-// AUTO LOGIN
-if(localStorage.getItem("login")){
-showSite();
+// SHOW PAGE
+function showPage(page){
+hideAll();
+document.getElementById(page).style.display="block";
+}
+
+// HIDE ALL
+function hideAll(){
+document.querySelectorAll(".main .card").forEach(el=>el.style.display="none");
 }
 
 // LOGOUT
 function logout(){
-localStorage.removeItem("login");
 location.reload();
 }
 
-// TIME + GREETING
+// TIME
 setInterval(()=>{
-let n=new Date();
-time.innerText=n.toLocaleTimeString();
-
-let h=n.getHours();
-greeting.innerText=(h<12?"🌅 Morning":h<18?"☀️ Afternoon":"🌙 Night")+" Gamer 😎";
+time.innerText=new Date().toLocaleTimeString();
 },1000);
 
 // COPY IP
 function copyIP(){
 navigator.clipboard.writeText("play.chocosmp.fun");
-alert("IP Copied ✅");
+alert("Copied ✅");
 }
 </script>
 
