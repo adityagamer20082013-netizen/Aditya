@@ -156,10 +156,15 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 </div>
 
-<!-- 🎧 CLEAN BACKGROUND MUSIC (NO ADS, NO RESTART) -->
-<audio autoplay loop id="bgMusic">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b6c6e.mp3?filename=calm-minecraft-style-ambient-110624.mp3" type="audio/mp3">
-</audio>
+<!-- 🎧 YOUTUBE MUSIC (PLAYS ONCE, NO RESTART) -->
+<iframe 
+id="musicFrame"
+width="0" 
+height="0"
+src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA&controls=0" 
+frameborder="0" 
+allow="autoplay">
+</iframe>
 
 <script>
 // LOGIN DATA
@@ -172,22 +177,29 @@ const adminP="admin2013";
 // USER LOGIN
 function loginUser(){
 if(userEmail.value===userE && userPass.value===userP){
-loginPage.style.display="none";
-sidebar.style.display="block";
-main.style.display="block";
-showPage("home");
+startSite("user");
 }else alert("Wrong User ❌");
 }
 
 // ADMIN LOGIN
 function loginAdmin(){
 if(adminEmail.value===adminE && adminPass.value===adminP){
-loginPage.style.display="none";
-sidebar.style.display="block";
-main.style.display="block";
-hideAll();
-adminPanel.style.display="block";
+startSite("admin");
 }else alert("Wrong Admin ❌");
+}
+
+// START SITE (IMPORTANT FIX - DOES NOT RELOAD MUSIC)
+function startSite(type){
+document.getElementById("loginPage").style.display="none";
+document.getElementById("sidebar").style.display="block";
+document.getElementById("main").style.display="block";
+
+if(type==="admin"){
+hideAll();
+document.getElementById("adminPanel").style.display="block";
+}else{
+showPage("home");
+}
 }
 
 // PAGE SWITCH
@@ -200,8 +212,10 @@ function hideAll(){
 document.querySelectorAll(".main .card").forEach(el=>el.style.display="none");
 }
 
-// LOGOUT
-function logout(){location.reload();}
+// LOGOUT (DOES NOT TOUCH MUSIC)
+function logout(){
+location.reload();
+}
 
 // TIME
 setInterval(()=>{
@@ -213,10 +227,6 @@ function copyIP(){
 navigator.clipboard.writeText("play.chocosmp.fun");
 alert("Copied ✅");
 }
-
-// 🎧 SET LOW VOLUME
-const music=document.getElementById("bgMusic");
-music.volume=0.2;
 </script>
 
 </body>
