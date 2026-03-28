@@ -13,6 +13,36 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
 }
 
+/* LOADER */
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#0c0d10;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+.loader-spin{
+border:5px solid #222;
+border-top:5px solid #00ffcc;
+border-radius:50%;
+width:60px;
+height:60px;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
 /* LOGIN */
 #loginPage{
 height:100vh;
@@ -20,6 +50,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+display:none;
 }
 
 /* SIDEBAR */
@@ -34,18 +65,12 @@ padding-top:20px;
 display:none;
 }
 
-.sidebar h2{
-text-align:center;
-margin-bottom:20px;
-}
-
 .sidebar a{
 display:block;
 padding:12px;
 color:white;
 text-decoration:none;
 }
-
 .sidebar a:hover{
 background:#00ffcc;
 color:black;
@@ -97,6 +122,13 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+<div class="loader-spin"></div>
+<h2>Checking your browser before accessing Choco SMP...</h2>
+<p>Please wait...</p>
+</div>
+
 <!-- LOGIN -->
 <div id="loginPage">
 <h1 class="rainbow">Choco SMP Login</h1>
@@ -118,10 +150,10 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-<h2 class="rainbow">Choco SMP</h2>
-<a href="#" onclick="showPage('home')">Home</a>
-<a href="#" onclick="showPage('server')">Server</a>
-<a href="#" onclick="showPage('community')">Community</a>
+<h2 class="rainbow" style="text-align:center;">Choco SMP</h2>
+<a onclick="showPage('home')">Home</a>
+<a onclick="showPage('server')">Server</a>
+<a onclick="showPage('community')">Community</a>
 <button onclick="logout()">Logout</button>
 </div>
 
@@ -156,9 +188,8 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 </div>
 
-<!-- 🎧 YOUTUBE MUSIC (PLAYS ONCE, NO RESTART) -->
+<!-- MUSIC -->
 <iframe 
-id="musicFrame"
 width="0" 
 height="0"
 src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA&controls=0" 
@@ -167,6 +198,12 @@ allow="autoplay">
 </iframe>
 
 <script>
+// LOADER DELAY
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+document.getElementById("loginPage").style.display="flex";
+},3000);
+
 // LOGIN DATA
 const userE="chocosmp@gmail.com";
 const userP="chocosmp123";
@@ -174,55 +211,46 @@ const userP="chocosmp123";
 const adminE="admin@gmail.com";
 const adminP="admin2013";
 
-// USER LOGIN
 function loginUser(){
 if(userEmail.value===userE && userPass.value===userP){
-startSite("user");
-}else alert("Wrong User ❌");
+start("user");
+}else alert("Wrong User");
 }
 
-// ADMIN LOGIN
 function loginAdmin(){
 if(adminEmail.value===adminE && adminPass.value===adminP){
-startSite("admin");
-}else alert("Wrong Admin ❌");
+start("admin");
+}else alert("Wrong Admin");
 }
 
-// START SITE (IMPORTANT FIX - DOES NOT RELOAD MUSIC)
-function startSite(type){
-document.getElementById("loginPage").style.display="none";
-document.getElementById("sidebar").style.display="block";
-document.getElementById("main").style.display="block";
+function start(type){
+loginPage.style.display="none";
+sidebar.style.display="block";
+main.style.display="block";
 
 if(type==="admin"){
 hideAll();
-document.getElementById("adminPanel").style.display="block";
+adminPanel.style.display="block";
 }else{
 showPage("home");
 }
 }
 
-// PAGE SWITCH
-function showPage(page){
+function showPage(p){
 hideAll();
-document.getElementById(page).style.display="block";
+document.getElementById(p).style.display="block";
 }
 
 function hideAll(){
 document.querySelectorAll(".main .card").forEach(el=>el.style.display="none");
 }
 
-// LOGOUT (DOES NOT TOUCH MUSIC)
-function logout(){
-location.reload();
-}
+function logout(){location.reload();}
 
-// TIME
 setInterval(()=>{
 time.innerText=new Date().toLocaleTimeString();
 },1000);
 
-// COPY IP
 function copyIP(){
 navigator.clipboard.writeText("play.chocosmp.fun");
 alert("Copied ✅");
