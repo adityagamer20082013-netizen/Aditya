@@ -13,29 +13,42 @@ background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
 }
 
-/* LOADER */
-#loader{
+/* ===== CLOUDFLARE FAKE ===== */
+#cfLoader{
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#0c0d10;
+top:0; left:0;
+width:100%; height:100%;
+background:#f6f7f9;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 z-index:9999;
+font-family:Arial;
 }
 
-.loader-spin{
-border:5px solid #222;
-border-top:5px solid #00ffcc;
+.cf-box{
+text-align:center;
+background:white;
+padding:40px;
+border-radius:8px;
+box-shadow:0 0 20px rgba(0,0,0,0.1);
+max-width:400px;
+color:black;
+}
+
+.cf-spinner{
+margin:20px auto;
+width:40px;
+height:40px;
+border:4px solid #ddd;
+border-top:4px solid #f38020;
 border-radius:50%;
-width:60px;
-height:60px;
 animation:spin 1s linear infinite;
-margin-bottom:20px;
+}
+
+.small{
+font-size:12px;
+color:#666;
 }
 
 @keyframes spin{
@@ -122,11 +135,17 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-<div class="loader-spin"></div>
-<h2>Checking your browser before accessing Choco SMP...</h2>
-<p>Please wait...</p>
+<!-- CLOUDFLARE SCREEN -->
+<div id="cfLoader">
+  <div class="cf-box">
+    <h2>Just a moment...</h2>
+    <p>Checking your browser before accessing <b>chocosmp.fun</b>.</p>
+
+    <div class="cf-spinner"></div>
+
+    <p class="small">This process is automatic. Your browser will redirect shortly.</p>
+    <p class="small">Ray ID: <span id="ray"></span></p>
+  </div>
 </div>
 
 <!-- LOGIN -->
@@ -173,9 +192,9 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 <div id="community" class="card" style="display:none;">
 <h2>🌐 Community</h2>
-<a href="https://discord.gg/dNhUUsaz75"><button>Discord</button></a>
-<a href="https://www.youtube.com/channel/UCMhd7jqZzvhtqrkVOqgrmKg"><button>YouTube</button></a>
-<a href="https://www.instagram.com/edit_with_awais/"><button>Instagram</button></a>
+<a href="https://discord.gg/dNhUUsaz75" target="_blank"><button>🎮 Discord</button></a>
+<a href="https://www.youtube.com/channel/UCMhd7jqZzvhtqrkVOqgrmKg" target="_blank"><button>▶ YouTube</button></a>
+<a href="https://www.instagram.com/edit_with_awais/" target="_blank"><button>📸 Instagram</button></a>
 </div>
 
 <div id="adminPanel" class="card" style="display:none;">
@@ -188,21 +207,18 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 </div>
 
-<!-- MUSIC -->
-<iframe 
-width="0" 
-height="0"
-src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA&controls=0" 
-frameborder="0" 
-allow="autoplay">
-</iframe>
-
 <script>
-// LOADER DELAY
+// RANDOM RAY ID
+function generateRay(){
+return Math.random().toString(36).substring(2,12);
+}
+document.getElementById("ray").innerText = generateRay();
+
+// FAKE CLOUDFLARE DELAY
 setTimeout(()=>{
-document.getElementById("loader").style.display="none";
+document.getElementById("cfLoader").style.display="none";
 document.getElementById("loginPage").style.display="flex";
-},3000);
+},4000);
 
 // LOGIN DATA
 const userE="chocosmp@gmail.com";
