@@ -156,14 +156,10 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 
 </div>
 
-<!-- 🎧 BACKGROUND MUSIC (NO RELOAD VERSION) -->
-<iframe 
-  width="0" 
-  height="0"
-  src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA&controls=0" 
-  frameborder="0" 
-  allow="autoplay">
-</iframe>
+<!-- 🎧 CLEAN BACKGROUND MUSIC (NO ADS, NO RESTART) -->
+<audio autoplay loop id="bgMusic">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b6c6e.mp3?filename=calm-minecraft-style-ambient-110624.mp3" type="audio/mp3">
+</audio>
 
 <script>
 // LOGIN DATA
@@ -217,6 +213,10 @@ function copyIP(){
 navigator.clipboard.writeText("play.chocosmp.fun");
 alert("Copied ✅");
 }
+
+// 🎧 SET LOW VOLUME
+const music=document.getElementById("bgMusic");
+music.volume=0.2;
 </script>
 
 </body>
