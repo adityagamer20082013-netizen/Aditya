@@ -6,20 +6,30 @@
 <title>Choco SMP Dashboard</title>
 
 <style>
-html,body{margin:0;padding:0;font-family:sans-serif;color:#fff;text-align:center;overflow-x:hidden}
+html,body{
+margin:0;
+padding:0;
+font-family:sans-serif;
+color:#fff;
+text-align:center;
+overflow-x:hidden;
 
-/* 🌧️ VIDEO */
-#userBgVideo{
-position:fixed;
-top:0;left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-display:none;
+/* 🌧️ Minecraft dark rainy background */
+background:url('https://images.unsplash.com/photo-1600375462888-8b6b5f0c4c1b?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+background-size:cover;
 }
 
-/* 🌈 RAINBOW */
+/* dark overlay */
+body::before{
+content:"";
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.6);
+z-index:-1;
+}
+
+/* 🌈 rainbow */
 .rainbow{
 font-weight:bold;
 background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
@@ -41,6 +51,7 @@ border-radius:20px;
 width:320px;
 box-shadow:0 0 15px #fff;
 }
+
 button{
 padding:10px 20px;
 margin:8px;
@@ -50,6 +61,7 @@ background:linear-gradient(45deg,#42e695,#7873f5);
 color:white;
 cursor:pointer;
 }
+
 input{
 padding:10px;
 margin:5px;
@@ -57,29 +69,11 @@ border-radius:8px;
 border:none;
 width:80%;
 }
-
-/* XP */
-#xpBarContainer{width:100%;height:20px;background:rgba(255,255,255,0.2);border-radius:10px}
-#xpBar{height:100%;width:0%;background:linear-gradient(90deg,#42e695,#7873f5)}
-
-/* SPARKLE */
-.sparkle{position:absolute;width:4px;height:4px;background:#fff;border-radius:50%;animation:s 0.8s}
-@keyframes s{100%{opacity:0}}
-
-/* CONFETTI */
-.confetti{position:absolute;width:6px;height:6px;top:0;animation:f 3s}
-@keyframes f{100%{top:100%;opacity:0}}
 </style>
 </head>
 
 <body>
 
-<!-- 🌧️ VIDEO -->
-<video autoplay muted loop id="userBgVideo">
-<source src="https://www.w3schools.com/howto/rain.mp4">
-</video>
-
-<!-- 🌈 TITLE -->
 <h1>Welcome to <span class="rainbow">Choco SMP</span></h1>
 
 <!-- LOGIN -->
@@ -101,7 +95,7 @@ width:80%;
 
 </div>
 
-<!-- USER DASHBOARD -->
+<!-- DASHBOARD -->
 <div id="dashboard" style="display:none;">
 
 <div class="card">
@@ -115,7 +109,6 @@ width:80%;
 <button onclick="copyIP()">Copy IP</button>
 </div>
 
-<!-- 🌐 SOCIAL -->
 <div class="card">
 <h3>🌐 Community</h3>
 
@@ -133,21 +126,10 @@ width:80%;
 
 </div>
 
-<div class="card">
-<h3>Level <span id="level">1</span></h3>
-<p>XP: <span id="xp">0</span></p>
-<div id="xpBarContainer"><div id="xpBar"></div></div>
-<button onclick="gainXP()">Gain XP</button>
-</div>
-
-<div class="card">
-<button onclick="openLiveLink()">Open Live Link</button>
-</div>
-
 <button onclick="logout()">Logout</button>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ADMIN -->
 <div id="adminPanel" style="display:none;">
 <div class="card">
 <h3>👑 Admin Panel</h3>
@@ -156,8 +138,13 @@ width:80%;
 <button onclick="logout()">Logout</button>
 </div>
 
+<!-- 🎧 MUSIC -->
+<audio autoplay loop id="bgMusic">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b6c6e.mp3?filename=calm-minecraft-style-ambient-110624.mp3" type="audio/mp3">
+</audio>
+
 <script>
-// 🔐 USER LOGIN
+// USER LOGIN
 const userEmailFixed="chocosmp@gmail.com";
 const userPassFixed="chocosmp123";
 
@@ -165,13 +152,12 @@ function loginUser(){
 if(userEmail.value===userEmailFixed && userPass.value===userPassFixed){
 login.style.display="none";
 dashboard.style.display="block";
-userBgVideo.style.display="block";
 }else{
 alert("Wrong User ❌");
 }
 }
 
-// 👑 ADMIN LOGIN
+// ADMIN LOGIN
 const adminEmailFixed="admin@gmail.com";
 const adminPassFixed="admin2013";
 
@@ -179,16 +165,14 @@ function loginAdmin(){
 if(adminEmail.value===adminEmailFixed && adminPass.value===adminPassFixed){
 login.style.display="none";
 adminPanel.style.display="block";
-userBgVideo.style.display="none";
 }else{
 alert("Wrong Admin ❌");
 }
 }
 
-// 🔄 LOGOUT
 function logout(){location.reload();}
 
-// ⏰ TIME + GREETING
+// TIME + GREETING
 setInterval(()=>{
 let n=new Date();
 time.innerText=n.toLocaleTimeString();
@@ -202,49 +186,15 @@ else g="🌙 Night";
 greeting.innerText=g+" Gamer 😎";
 },1000);
 
-// ⚡ XP
-let xp=0,level=1;
-function gainXP(){
-xp+=10;
-if(xp>=100){xp=0;level++;addConfetti();}
-document.getElementById("xp").innerText=xp;
-document.getElementById("level").innerText=level;
-document.getElementById("xpBar").style.width=xp+"%";
-
-// sparkle
-for(let i=0;i<5;i++){
-let s=document.createElement("div");
-s.className="sparkle";
-s.style.left=Math.random()*100+"%";
-s.style.top=Math.random()*20+"px";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),800);
-}
-}
-
-// 🎉 CONFETTI
-function addConfetti(){
-for(let i=0;i<40;i++){
-let c=document.createElement("div");
-c.className="confetti";
-c.style.left=Math.random()*100+"%";
-c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),3000);
-}
-}
-
-// 📋 COPY IP
+// COPY IP
 function copyIP(){
 navigator.clipboard.writeText("play.chocosmp.fun");
 alert("IP Copied: play.chocosmp.fun ✅");
 }
 
-// 🌐 LINK
-function openLiveLink(){
-let url=prompt("Enter link","https://adityagamergg2008");
-if(url) window.open(url);
-}
+// MUSIC LOW VOLUME
+const music=document.getElementById("bgMusic");
+music.volume=0.2;
 </script>
 
 </body>
