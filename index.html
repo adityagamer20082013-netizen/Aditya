@@ -3,67 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Choco SMP Dashboard</title>
+<title>Choco SMP</title>
 
 <style>
-html,body{
+*{
 margin:0;
 padding:0;
+box-sizing:border-box;
 font-family:sans-serif;
-color:#fff;
-text-align:center;
-overflow-x:hidden;
 }
 
-/* 🎥 VIDEO BACKGROUND */
-#bgVideo{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
+body{
+color:white;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+scroll-behavior:smooth;
 }
 
-/* 🌑 DARK OVERLAY */
-body::before{
-content:"";
+/* NAVBAR */
+nav{
 position:fixed;
 top:0;
-left:0;
 width:100%;
-height:100%;
 background:rgba(0,0,0,0.6);
-z-index:-1;
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-between;
+padding:15px 30px;
+z-index:1000;
 }
 
-/* 🌈 RAINBOW TEXT */
+nav a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+}
+
+nav a:hover{
+color:#00ffcc;
+}
+
+/* 🌈 Rainbow */
 .rainbow{
-font-weight:bold;
 background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:rainbowMove 3s linear infinite;
+animation:move 3s linear infinite;
 }
-@keyframes rainbowMove{
+@keyframes move{
 0%{background-position:0%}
 100%{background-position:200%}
 }
 
-/* UI */
-.card{
-background:rgba(0,0,0,0.5);
-margin:15px auto;
-padding:20px;
-border-radius:20px;
-width:320px;
-box-shadow:0 0 15px #fff;
+/* SECTION */
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px;
 }
 
+/* HERO */
+.hero{
+text-align:center;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.08);
+padding:25px;
+margin:15px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 30px #00ffcc;
+}
+
+/* BUTTON */
 button{
-padding:10px 20px;
-margin:8px;
+padding:12px 25px;
+margin:10px;
 border:none;
 border-radius:10px;
 background:linear-gradient(45deg,#42e695,#7873f5);
@@ -71,60 +100,51 @@ color:white;
 cursor:pointer;
 }
 
-input{
-padding:10px;
-margin:5px;
-border-radius:8px;
-border:none;
-width:80%;
+button:active{
+transform:scale(0.9);
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:20px;
+background:#000;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎥 VIDEO -->
-<video autoplay muted loop id="bgVideo">
-<source src="https://cdn.coverr.co/videos/coverr-rain-in-the-forest-5173/1080p.mp4" type="video/mp4">
-</video>
+<!-- NAVBAR -->
+<nav>
+<div class="rainbow">Choco SMP</div>
+<div>
+<a href="#home">Home</a>
+<a href="#server">Server</a>
+<a href="#community">Community</a>
+</div>
+</nav>
 
+<!-- HOME -->
+<section id="home" class="hero">
 <h1>Welcome to <span class="rainbow">Choco SMP</span></h1>
-
-<!-- LOGIN -->
-<div id="login">
-
-<div class="card">
-<h3>User Login</h3>
-<input id="userEmail" placeholder="Enter Gmail"><br>
-<input type="password" id="userPass" placeholder="Enter Password"><br>
-<button onclick="loginUser()">Login</button>
-</div>
-
-<div class="card">
-<h3>Admin Login</h3>
-<input id="adminEmail" placeholder="Email"><br>
-<input type="password" id="adminPass" placeholder="Password"><br>
-<button onclick="loginAdmin()">Login</button>
-</div>
-
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard" style="display:none;">
-
-<div class="card">
-<h3 id="greeting">Hello Gamer</h3>
+<h3 id="greeting">Hello Gamer 😎</h3>
 <p id="time"></p>
-</div>
+</section>
 
+<!-- SERVER -->
+<section id="server">
 <div class="card">
-<h3>🎮 Choco SMP</h3>
+<h2>🎮 Server Info</h2>
 <p>IP: play.chocosmp.fun</p>
 <button onclick="copyIP()">Copy IP</button>
 </div>
+</section>
 
+<!-- COMMUNITY -->
+<section id="community">
 <div class="card">
-<h3>🌐 Community</h3>
+<h2>🌐 Join Community</h2>
 
 <a href="https://discord.gg/dNhUUsaz75" target="_blank">
 <button>💬 Discord</button>
@@ -139,55 +159,15 @@ width:80%;
 </a>
 
 </div>
+</section>
 
-<button onclick="logout()">Logout</button>
-</div>
-
-<!-- ADMIN -->
-<div id="adminPanel" style="display:none;">
-<div class="card">
-<h3>👑 Admin Panel</h3>
-<p>Choco SMP Control</p>
-</div>
-<button onclick="logout()">Logout</button>
-</div>
-
-<!-- 🎧 MUSIC -->
-<audio autoplay loop id="bgMusic">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b6c6e.mp3?filename=calm-minecraft-style-ambient-110624.mp3" type="audio/mp3">
-</audio>
+<!-- FOOTER -->
+<footer>
+<p>© 2026 Choco SMP | All Rights Reserved</p>
+</footer>
 
 <script>
-// USER LOGIN
-const userEmailFixed="chocosmp@gmail.com";
-const userPassFixed="chocosmp123";
-
-function loginUser(){
-if(userEmail.value===userEmailFixed && userPass.value===userPassFixed){
-login.style.display="none";
-dashboard.style.display="block";
-}else{
-alert("Wrong User ❌");
-}
-}
-
-// ADMIN LOGIN
-const adminEmailFixed="admin@gmail.com";
-const adminPassFixed="admin2013";
-
-function loginAdmin(){
-if(adminEmail.value===adminEmailFixed && adminPass.value===adminPassFixed){
-login.style.display="none";
-adminPanel.style.display="block";
-}else{
-alert("Wrong Admin ❌");
-}
-}
-
-// LOGOUT
-function logout(){location.reload();}
-
-// TIME + GREETING
+// TIME
 setInterval(()=>{
 let n=new Date();
 time.innerText=n.toLocaleTimeString();
@@ -204,12 +184,8 @@ greeting.innerText=g+" Gamer 😎";
 // COPY IP
 function copyIP(){
 navigator.clipboard.writeText("play.chocosmp.fun");
-alert("IP Copied: play.chocosmp.fun ✅");
+alert("IP Copied ✅");
 }
-
-// MUSIC VOLUME
-const music=document.getElementById("bgMusic");
-music.volume=0.2;
 </script>
 
 </body>
