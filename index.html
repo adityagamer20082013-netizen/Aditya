@@ -14,7 +14,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ===== CLOUDFLARE LOADER ===== */
+/* CLOUDFLARE LOADER */
 #cfLoader{
 position:fixed;
 top:0;left:0;
@@ -49,7 +49,7 @@ animation:spin 1s linear infinite;
 100%{transform:rotate(360deg);}
 }
 
-/* ===== VIDEO BACKGROUND FOR USER ===== */
+/* VIDEO BACKGROUND */
 #userBackgroundVideo{
 position:fixed;
 top:0;left:0;
@@ -110,7 +110,6 @@ padding:15px;
 margin:10px;
 border-radius:15px;
 backdrop-filter:blur(10px);
-/* removed old repeating white lines gradient */
 }
 
 input{
@@ -145,7 +144,7 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
   <source src="minecraft_shader_video.mp4" type="video/mp4">
 </video>
 
-<!-- CLOUDFARE SCREEN -->
+<!-- CLOUDFLARE LOADER -->
 <div id="cfLoader">
   <div class="cf-box">
     <h2>Just a moment...</h2>
@@ -211,8 +210,17 @@ background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
 <button>Restart Server</button>
 </div>
 
+<!-- MUSIC -->
+<iframe 
+width="0" 
+height="0"
+src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA&controls=0" 
+frameborder="0" 
+allow="autoplay">
+</iframe>
+
 <script>
-// RANDOM CLOUDFARE LOADER
+// CLOUDFLARE LOADER
 setTimeout(()=>{
 document.getElementById("cfLoader").style.display="none";
 document.getElementById("loginPage").style.display="flex";
