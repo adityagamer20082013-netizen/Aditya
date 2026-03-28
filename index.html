@@ -6,93 +6,67 @@
 <title>Choco SMP</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
 
 body{
-color:white;
 background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-scroll-behavior:smooth;
-}
-
-/* NAVBAR */
-nav{
-position:fixed;
-top:0;
-width:100%;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-display:flex;
-justify-content:space-between;
-padding:15px 30px;
-z-index:1000;
-}
-
-nav a{
 color:white;
-text-decoration:none;
-margin:0 10px;
+text-align:center;
 }
 
-nav a:hover{
-color:#00ffcc;
-}
-
-/* 🌈 Rainbow */
-.rainbow{
-background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:move 3s linear infinite;
-}
-@keyframes move{
-0%{background-position:0%}
-100%{background-position:200%}
-}
-
-/* SECTION */
-section{
-min-height:100vh;
+/* LOGIN */
+#loginPage{
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:40px;
 }
 
-/* HERO */
-.hero{
-text-align:center;
-}
-
-.hero h1{
-font-size:40px;
+/* CONTAINER (COMPACT) */
+.container{
+margin-top:70px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:15px;
 }
 
 /* CARD */
 .card{
 background:rgba(255,255,255,0.08);
-padding:25px;
-margin:15px;
-border-radius:20px;
+padding:15px;
+border-radius:15px;
+width:300px;
 backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(0,0,0,0.5);
-transition:0.3s;
+box-shadow:0 0 15px rgba(0,0,0,0.5);
 }
 
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 0 30px #00ffcc;
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.6);
+padding:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+/* INPUT */
+input{
+padding:10px;
+margin:5px;
+width:90%;
+border:none;
+border-radius:8px;
 }
 
 /* BUTTON */
 button{
-padding:12px 25px;
-margin:10px;
+padding:10px 20px;
+margin:8px;
 border:none;
 border-radius:10px;
 background:linear-gradient(45deg,#42e695,#7873f5);
@@ -100,85 +74,120 @@ color:white;
 cursor:pointer;
 }
 
-button:active{
-transform:scale(0.9);
-}
-
-/* FOOTER */
-footer{
-text-align:center;
-padding:20px;
-background:#000;
+/* RAINBOW */
+.rainbow{
+background:linear-gradient(90deg,red,orange,yellow,green,cyan,blue,violet);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav>
-<div class="rainbow">Choco SMP</div>
-<div>
-<a href="#home">Home</a>
-<a href="#server">Server</a>
-<a href="#community">Community</a>
+<!-- LOGIN -->
+<div id="loginPage">
+<h1 class="rainbow">Choco SMP Login</h1>
+
+<div class="card">
+<h3>User Login</h3>
+<input id="userEmail" placeholder="Email">
+<input id="userPass" type="password" placeholder="Password">
+<button onclick="loginUser()">Login</button>
 </div>
+
+<div class="card">
+<h3>Admin Login</h3>
+<input id="adminEmail" placeholder="Email">
+<input id="adminPass" type="password" placeholder="Password">
+<button onclick="loginAdmin()">Login</button>
+</div>
+</div>
+
+<!-- MAIN SITE -->
+<div id="mainSite" style="display:none;">
+
+<nav>
+<span class="rainbow">Choco SMP</span>
+<button onclick="logout()">Logout</button>
 </nav>
 
+<div class="container">
+
 <!-- HOME -->
-<section id="home" class="hero">
-<h1>Welcome to <span class="rainbow">Choco SMP</span></h1>
-<h3 id="greeting">Hello Gamer 😎</h3>
+<div class="card">
+<h2>Welcome to <span class="rainbow">Choco SMP</span></h2>
+<h3 id="greeting"></h3>
 <p id="time"></p>
-</section>
+</div>
 
 <!-- SERVER -->
-<section id="server">
 <div class="card">
-<h2>🎮 Server Info</h2>
+<h3>🎮 Server</h3>
 <p>IP: play.chocosmp.fun</p>
 <button onclick="copyIP()">Copy IP</button>
 </div>
-</section>
 
 <!-- COMMUNITY -->
-<section id="community">
 <div class="card">
-<h2>🌐 Join Community</h2>
+<h3>🌐 Community</h3>
 
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>💬 Discord</button>
-</a>
-
-<a href="https://www.youtube.com/channel/UCMhd7jqZzvhtqrkVOqgrmKg" target="_blank">
-<button>🔥 YouTube</button>
-</a>
-
-<a href="https://www.instagram.com/edit_with_awais/" target="_blank">
-<button>📸 Instagram</button>
-</a>
+<a href="https://discord.gg/dNhUUsaz75"><button>Discord</button></a>
+<a href="https://www.youtube.com/channel/UCMhd7jqZzvhtqrkVOqgrmKg"><button>YouTube</button></a>
+<a href="https://www.instagram.com/edit_with_awais/"><button>Instagram</button></a>
 
 </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-<p>© 2026 Choco SMP | All Rights Reserved</p>
-</footer>
+</div>
+</div>
 
 <script>
-// TIME
+// LOGIN DATA
+const userE="chocosmp@gmail.com";
+const userP="chocosmp123";
+
+const adminE="admin@gmail.com";
+const adminP="admin123";
+
+// LOGIN
+function loginUser(){
+if(userEmail.value===userE && userPass.value===userP){
+localStorage.setItem("login","user");
+showSite();
+}else alert("Wrong User ❌");
+}
+
+function loginAdmin(){
+if(adminEmail.value===adminE && adminPass.value===adminP){
+localStorage.setItem("login","admin");
+showSite();
+}else alert("Wrong Admin ❌");
+}
+
+// SHOW SITE
+function showSite(){
+loginPage.style.display="none";
+mainSite.style.display="block";
+}
+
+// AUTO LOGIN
+if(localStorage.getItem("login")){
+showSite();
+}
+
+// LOGOUT
+function logout(){
+localStorage.removeItem("login");
+location.reload();
+}
+
+// TIME + GREETING
 setInterval(()=>{
 let n=new Date();
 time.innerText=n.toLocaleTimeString();
 
 let h=n.getHours();
-let g="Hello";
-if(h<12) g="🌅 Morning";
-else if(h<18) g="☀️ Afternoon";
-else g="🌙 Night";
-
-greeting.innerText=g+" Gamer 😎";
+greeting.innerText=(h<12?"🌅 Morning":h<18?"☀️ Afternoon":"🌙 Night")+" Gamer 😎";
 },1000);
 
 // COPY IP
