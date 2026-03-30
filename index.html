@@ -14,7 +14,7 @@ body{background:#0f2027;color:white;overflow-x:hidden;}
 position:fixed;width:100%;height:100%;
 background:#0c0d10;display:flex;
 justify-content:center;align-items:center;
-flex-direction:column;z-index:9999;text-align:center;
+flex-direction:column;z-index:9999;
 }
 .loader-spin{
 border:4px solid #222;border-top:4px solid #f48120;
@@ -25,7 +25,11 @@ animation:spin 1s linear infinite;margin:20px;
 .cf-logo{color:#f48120;font-size:28px;font-weight:bold;}
 
 /* LOGIN */
-#loginPage{height:100vh;display:none;justify-content:center;align-items:center;flex-direction:column;}
+#loginPage{
+height:100vh;display:none;
+justify-content:center;align-items:center;
+flex-direction:column;
+}
 
 /* SIDEBAR */
 .sidebar{
@@ -33,7 +37,7 @@ position:fixed;left:0;top:0;width:200px;height:100%;
 background:#111;padding-top:20px;display:none;
 }
 .sidebar h2{text-align:center;color:#f48120;margin-bottom:20px;}
-.sidebar a{display:block;padding:12px;color:white;text-decoration:none;cursor:pointer;}
+.sidebar a{display:block;padding:12px;color:white;cursor:pointer;}
 .sidebar a:hover{background:#f48120;color:black;}
 
 /* MAIN */
@@ -43,7 +47,6 @@ background:#111;padding-top:20px;display:none;
 .card{
 background:rgba(255,255,255,0.05);
 padding:15px;margin:10px 0;border-radius:12px;
-border:none;
 }
 
 /* BUTTON */
@@ -61,9 +64,8 @@ input{padding:10px;margin:5px;border:none;border-radius:8px;}
 <div id="loader">
 <div class="cf-logo">Cloudflare</div>
 <div class="loader-spin"></div>
-<h3>Checking your browser before accessing</h3>
-<p>choco-smp.site</p>
-<p>Ray ID: 7x92ab123 • Performance & security</p>
+<h3>Checking your browser...</h3>
+<p>Ray ID: 7x92ab123</p>
 </div>
 
 <!-- LOGIN -->
@@ -99,29 +101,18 @@ input{padding:10px;margin:5px;border:none;border-radius:8px;}
 
 <!-- HOME -->
 <div id="home" class="card">
-<h2>🎮 Welcome to Choco SMP 👑</h2>
+<h2>🎮 Welcome to CHOCO SMP 👑</h2>
 
 <div style="background:rgba(0,0,0,0.4);padding:15px;border-radius:10px;line-height:1.6;">
 <h3>👋 Hey New Charming Star</h3>
 
-<p>📘 Verify Yourself</p>
-<button>Verify</button>
-
-<p>📘 Server Info</p>
-<button>Info</button>
-
-<p>💬 Submit IGN</p>
-<button>Submit</button>
-
-<p>📚 Rules & FAQ</p>
-<button>Rules</button>
-
-<p>🎟️ Help Desk</p>
-<button>Help</button>
+<a href="https://discord.com/channels/1483033610670964877/1483070767284621405" target="_blank"><button>Verify</button></a>
+<a href="https://discord.com/channels/1483033610670964877/1483064348115992597" target="_blank"><button>Server Info</button></a>
+<a href="https://discord.com/channels/1483033610670964877/1483069645622743073" target="_blank"><button>Submit IGN</button></a>
+<a href="https://discord.com/channels/1483033610670964877/1483064197968298145" target="_blank"><button>Rules</button></a>
+<a href="https://discord.com/channels/1483033610670964877/1483066579523604480" target="_blank"><button>Help Desk</button></a>
 
 <hr style="margin:10px 0;border:1px solid #333;">
-
-<p>🕹️ Thanks for joining CHOCO SMP!</p>
 <p>💻 IP: play.chocosmp.fun</p>
 </div>
 
@@ -130,29 +121,44 @@ input{padding:10px;margin:5px;border:none;border-radius:8px;}
 
 <!-- SERVER -->
 <div id="server" class="card" style="display:none;">
-<h2>📢 SERVER INFO</h2>
-<p>Scripted SMP • Weekly weapons • Events • No hacking</p>
-<p>IP: play.chocosmp.fun</p>
+<h2>📢 Server Info</h2>
+<p>Scripted SMP • Events • Glory Weapons</p>
+
+<h2>📜 Rules</h2>
+<img src="https://i.imgur.com/8Km9tLL.png" style="width:100%;border-radius:10px;">
+
+<div style="background:rgba(0,0,0,0.4);padding:15px;border-radius:10px;">
+<p>Respect • No Hack • No Grief • Have Fun 🎮</p>
+</div>
 </div>
 
 <!-- COMMUNITY -->
 <div id="community" class="card" style="display:none;">
 
-<h2>💬 Chat Channels</h2>
+<h2>💬 Chat</h2>
 
+<a href="https://discord.com/channels/1483033610670964877/1483064156461469706" target="_blank">
 <button>General Chat</button>
+</a>
+
+<a href="https://discord.gg/dNhUUsaz75" target="_blank">
 <button>Game Chat</button>
+</a>
+
+<a href="https://discord.gg/dNhUUsaz75" target="_blank">
 <button>Meme</button>
+</a>
+
+<a href="https://discord.gg/dNhUUsaz75" target="_blank">
 <button>Images</button>
+</a>
 
-<h2 style="margin-top:20px;">🎤 Voice Channels</h2>
+<h2 style="margin-top:20px;">🎤 Voice</h2>
 
-<div>
-<p>🔊 Lobby <button>Join</button></p>
-<p>🎮 Gaming <button>Join</button></p>
-<p>⛏️ Minecraft <button>Join</button></p>
-<p>🔴 Live VC <button>Join</button></p>
-</div>
+<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>🔊 Lobby <button>Join</button></p></a>
+<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>🎮 Gaming <button>Join</button></p></a>
+<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>⛏️ Minecraft <button>Join</button></p></a>
+<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>🔴 Live VC <button>Join</button></p></a>
 
 </div>
 
@@ -171,13 +177,11 @@ src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5
 allow="autoplay"></iframe>
 
 <script>
-// LOADER
 setTimeout(()=>{
 loader.style.display="none";
 loginPage.style.display="flex";
 },3000);
 
-// LOGIN
 const userE="chocosmp@gmail.com";
 const userP="chocosmp123";
 const adminE="admin@gmail.com";
