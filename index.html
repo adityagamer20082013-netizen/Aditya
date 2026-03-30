@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,40 +8,22 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
 
-/* CLOUDFLARE (ONLY WHITE PART) */
+/* CLOUDFARE */
 #loader{
-position:fixed;
-width:100%;
-height:100%;
-background:#ffffff;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;
+position:fixed;width:100%;height:100%;
+background:white;display:flex;justify-content:center;
+align-items:center;z-index:9999;
 }
-
 .cf-box{text-align:center;color:black;}
-.cf-logo{font-size:28px;font-weight:bold;color:#f48120;margin-bottom:10px;}
-
-.cf-bar{
-width:220px;height:6px;background:#eee;
-border-radius:10px;overflow:hidden;margin:10px auto;
-}
-
-.cf-fill{
-width:0%;height:100%;
-background:#f48120;
-animation:load 3s linear forwards;
-}
-
+.cf-logo{font-size:28px;color:#f48120;font-weight:bold;}
+.cf-bar{width:200px;height:6px;background:#eee;margin:10px auto;border-radius:10px;overflow:hidden;}
+.cf-fill{width:0;height:100%;background:#f48120;animation:load 3s forwards;}
 @keyframes load{100%{width:100%;}}
 
 /* LOGIN */
 #loginPage{
-display:none;height:100vh;
-justify-content:center;align-items:center;
-flex-direction:column;
-background:#0f2027;color:white;
+display:none;height:100vh;background:#0f2027;color:white;
+justify-content:center;align-items:center;flex-direction:column;
 }
 
 /* SIDEBAR */
@@ -49,78 +31,60 @@ background:#0f2027;color:white;
 position:fixed;width:200px;height:100%;
 background:#111;padding-top:20px;display:none;
 }
-.sidebar h2{text-align:center;color:#f48120;}
-.sidebar a{
-display:block;padding:12px;color:white;cursor:pointer;
-}
-.sidebar a:hover{background:#f48120;color:black;}
+.sidebar a{display:block;padding:12px;color:white;cursor:pointer;}
+.sidebar a:hover{background:#f48120;}
 
 .main{
 margin-left:200px;padding:20px;
-display:none;background:#0f2027;color:white;
-min-height:100vh;
+display:none;background:#0f2027;color:white;min-height:100vh;
 }
 
-/* CARD */
 .card{
 background:rgba(255,255,255,0.05);
-padding:15px;margin:10px 0;border-radius:12px;
+padding:15px;margin:10px 0;border-radius:10px;
 }
 
-/* BUTTON */
 button{
-padding:10px;margin:5px;border:none;
-border-radius:8px;background:#f48120;color:white;
-cursor:pointer;
+padding:8px 12px;border:none;border-radius:6px;
+background:#f48120;color:white;cursor:pointer;
 }
 
-input{padding:10px;margin:5px;border-radius:8px;border:none;}
+input{padding:8px;border-radius:6px;border:none;margin:3px;}
+
+/* CHAT */
+#chatBox{
+height:250px;overflow:auto;
+background:#111;padding:10px;border-radius:10px;
+}
+.msg{margin-bottom:10px;}
+.msg img{width:120px;border-radius:6px;margin-top:5px;}
 </style>
 </head>
 
 <body>
 
-<!-- CLOUDFARE LOADER -->
+<!-- CLOUDFARE -->
 <div id="loader">
-  <div class="cf-box">
-    <div class="cf-logo">Cloudflare</div>
-
-    <div class="cf-bar">
-      <div class="cf-fill"></div>
-    </div>
-
-    <h3>Checking your browser before accessing</h3>
-    <p>choco-smp.site</p>
-    <p style="color:gray;">Ray ID: 7x92ab123</p>
-  </div>
+<div class="cf-box">
+<div class="cf-logo">Cloudflare</div>
+<div class="cf-bar"><div class="cf-fill"></div></div>
+<p>Checking your browser...</p>
+</div>
 </div>
 
 <!-- LOGIN -->
 <div id="loginPage">
 <h2>Login</h2>
-
-<div class="card">
-<h3>User Login</h3>
 <input id="userEmail" placeholder="Email">
 <input id="userPass" type="password" placeholder="Password">
-<button onclick="loginUser()">Login</button>
-</div>
-
-<div class="card">
-<h3>Admin Login</h3>
-<input id="adminEmail" placeholder="Email">
-<input id="adminPass" type="password" placeholder="Password">
-<button onclick="loginAdmin()">Login</button>
-</div>
+<button onclick="login()">Login</button>
 </div>
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-<h2>Choco SMP</h2>
-<a onclick="showPage('home')">Home</a>
-<a onclick="showPage('server')">Server</a>
-<a onclick="showPage('community')">Community</a>
-<button onclick="logout()">Logout</button>
+<a onclick="show('home')">Home</a>
+<a onclick="show('server')">Server</a>
+<a onclick="show('community')">Community</a>
 </div>
 
 <!-- MAIN -->
@@ -128,86 +92,33 @@ input{padding:10px;margin:5px;border-radius:8px;border:none;}
 
 <!-- HOME -->
 <div id="home" class="card">
-<h2>🎮 Welcome to CHOCO SMP</h2>
-
-<a href="https://discord.com/channels/1483033610670964877/1483070767284621405" target="_blank"><button>Verify</button></a>
-<a href="https://discord.com/channels/1483033610670964877/1483064348115992597" target="_blank"><button>Server Info</button></a>
-<a href="https://discord.com/channels/1483033610670964877/1483069645622743073" target="_blank"><button>Submit IGN</button></a>
-<a href="https://discord.com/channels/1483033610670964877/1483064197968298145" target="_blank"><button>Rules</button></a>
-<a href="https://discord.com/channels/1483033610670964877/1483066579523604480" target="_blank"><button>Help</button></a>
-
+<h2>Welcome to Choco SMP</h2>
 <p id="time"></p>
 </div>
 
 <!-- SERVER -->
 <div id="server" class="card" style="display:none;">
-<h2>🎮 Server</h2>
+<h3>IP: play.chocosmp.fun</h3>
 
-<h3>💻 IP</h3>
-<p>play.chocosmp.fun</p>
-
-<div style="background:#111;padding:10px;border-radius:10px;margin-top:15px;">
-<h3>📜 #rules</h3>
-
-<img src="https://via.placeholder.com/800x200?text=CHOCO+SMP+RULES"
-style="width:100%;border-radius:8px;margin:10px 0;">
-
-<p>1. Respect everyone</p>
-<p>2. No hacking</p>
-<p>3. No griefing</p>
-<p>4. Follow teams</p>
-<p>5. No spam</p>
-<p>6. Be active</p>
-<p>7. Upload content</p>
-<p>8. No drama</p>
-<p>9. Follow staff</p>
-<p>10. No bugs</p>
-<p>11. Clean chat</p>
-<p>12. No ads</p>
-<p>13. Respect decisions</p>
-<p>14. No impersonation</p>
-<p>15. Have fun 🎮</p>
+<div style="background:#111;padding:10px;border-radius:10px;">
+<h3>#rules</h3>
+<img src="https://via.placeholder.com/800x200?text=CHOCO+SMP+RULES" style="width:100%;border-radius:8px;">
+<p>Respect • No Hack • No Grief • Have Fun</p>
 </div>
 </div>
 
 <!-- COMMUNITY -->
 <div id="community" class="card" style="display:none;">
 
-<h2>💬 Chat</h2>
+<h3>💬 Chat</h3>
 
-<a href="https://discord.com/channels/1483033610670964877/1483064156461469706" target="_blank">
-<button>General</button></a>
+<input id="name" placeholder="Name">
+<div id="chatBox"></div>
 
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Game</button></a>
+<input id="msg" placeholder="Message">
+<input type="file" id="img">
+<button onclick="send()">Send</button>
 
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Meme</button></a>
-
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Images</button></a>
-
-<h2>🎤 Voice</h2>
-
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Lobby</button></a>
-
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Gaming</button></a>
-
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Minecraft</button></a>
-
-<a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Live VC</button></a>
-
-</div>
-
-<!-- ADMIN -->
-<div id="adminPanel" class="card" style="display:none;">
-<h2>Admin Panel</h2>
-<button>Start</button>
-<button>Stop</button>
 </div>
 
 </div>
@@ -223,46 +134,63 @@ loader.style.display="none";
 loginPage.style.display="flex";
 },3000);
 
-const userE="chocosmp@gmail.com";
-const userP="chocosmp123";
-const adminE="admin@gmail.com";
-const adminP="admin2013";
-
-function loginUser(){
-if(userEmail.value===userE && userPass.value===userP){
-start("user");
-}else alert("Wrong User");
-}
-
-function loginAdmin(){
-if(adminEmail.value===adminE && adminPass.value===adminP){
-start("admin");
-}else alert("Wrong Admin");
-}
-
-function start(type){
+function login(){
 loginPage.style.display="none";
 sidebar.style.display="block";
 main.style.display="block";
+}
 
-if(type==="admin"){
-hideAll();
-adminPanel.style.display="block";
+function show(id){
+document.querySelectorAll(".card").forEach(c=>c.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+/* CHAT SYSTEM */
+let messages=[];
+
+function send(){
+let name=document.getElementById("name").value||"User";
+let text=document.getElementById("msg").value;
+let file=document.getElementById("img").files[0];
+
+let msgObj={name,text,time:Date.now()};
+
+if(file){
+let reader=new FileReader();
+reader.onload=e=>{
+msgObj.img=e.target.result;
+messages.push(msgObj);
+render();
+};
+reader.readAsDataURL(file);
 }else{
-showPage("home");
-}
-}
-
-function showPage(p){
-document.querySelectorAll(".main .card").forEach(e=>e.style.display="none");
-document.getElementById(p).style.display="block";
+messages.push(msgObj);
+render();
 }
 
-function hideAll(){
-document.querySelectorAll(".main .card").forEach(e=>e.style.display="none");
+msg.value="";
+img.value="";
 }
 
-function logout(){location.reload();}
+function render(){
+let box=document.getElementById("chatBox");
+box.innerHTML="";
+let now=Date.now();
+
+messages=messages.filter(m=>now-m.time<30*60*1000);
+
+messages.forEach(m=>{
+let div=document.createElement("div");
+div.className="msg";
+div.innerHTML="<b>"+m.name+":</b> "+(m.text||"");
+if(m.img) div.innerHTML+="<br><img src='"+m.img+"'>";
+box.appendChild(div);
+});
+
+box.scrollTop=box.scrollHeight;
+}
+
+setInterval(render,2000);
 
 setInterval(()=>{
 time.innerText=new Date().toLocaleTimeString();
@@ -270,4 +198,4 @@ time.innerText=new Date().toLocaleTimeString();
 </script>
 
 </body>
-</html>
+</html> 
