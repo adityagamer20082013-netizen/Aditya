@@ -7,143 +7,68 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+body{background:#0f2027;color:white;overflow-x:hidden;}
 
-body{
-background:#0f2027;
-color:white;
-overflow-x:hidden;
-}
-
-/* ☁️ CLOUDFLARE STYLE */
+/* LOADER */
 #loader{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#0c0d10;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:9999;
-text-align:center;
+position:fixed;width:100%;height:100%;
+background:#0c0d10;display:flex;
+justify-content:center;align-items:center;
+flex-direction:column;z-index:9999;text-align:center;
 }
-
 .loader-spin{
-border:4px solid #222;
-border-top:4px solid #f48120;
-border-radius:50%;
-width:50px;
-height:50px;
-animation:spin 1s linear infinite;
-margin:20px;
+border:4px solid #222;border-top:4px solid #f48120;
+border-radius:50%;width:50px;height:50px;
+animation:spin 1s linear infinite;margin:20px;
 }
-
-@keyframes spin{
-100%{transform:rotate(360deg);}
-}
-
-.cf-logo{
-color:#f48120;
-font-size:28px;
-font-weight:bold;
-}
+@keyframes spin{100%{transform:rotate(360deg);}}
+.cf-logo{color:#f48120;font-size:28px;font-weight:bold;}
 
 /* LOGIN */
-#loginPage{
-height:100vh;
-display:none;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-}
+#loginPage{height:100vh;display:none;justify-content:center;align-items:center;flex-direction:column;}
 
 /* SIDEBAR */
 .sidebar{
-position:fixed;
-left:0;
-top:0;
-width:200px;
-height:100%;
-background:#111;
-padding-top:20px;
-display:none;
+position:fixed;left:0;top:0;width:200px;height:100%;
+background:#111;padding-top:20px;display:none;
 }
-
-.sidebar h2{
-text-align:center;
-color:#f48120;
-margin-bottom:20px;
-}
-
-.sidebar a{
-display:block;
-padding:12px;
-color:white;
-text-decoration:none;
-cursor:pointer;
-}
-
-.sidebar a:hover{
-background:#f48120;
-color:black;
-}
+.sidebar h2{text-align:center;color:#f48120;margin-bottom:20px;}
+.sidebar a{display:block;padding:12px;color:white;text-decoration:none;cursor:pointer;}
+.sidebar a:hover{background:#f48120;color:black;}
 
 /* MAIN */
-.main{
-margin-left:200px;
-padding:20px;
-display:none;
-}
+.main{margin-left:200px;padding:20px;display:none;}
 
-/* CARD (WHITE LINE FIXED) */
+/* CARD */
 .card{
 background:rgba(255,255,255,0.05);
-padding:15px;
-margin:10px 0;
-border-radius:12px;
-border:none; /* FIX */
-box-shadow:none; /* FIX */
-}
-
-/* INPUT */
-input{
-padding:10px;
-margin:5px;
+padding:15px;margin:10px 0;border-radius:12px;
 border:none;
-border-radius:8px;
-outline:none;
 }
 
 /* BUTTON */
 button{
-padding:10px 20px;
-margin:5px;
-border:none;
-border-radius:8px;
-background:#f48120;
-color:white;
-cursor:pointer;
+padding:10px 20px;margin:5px;border:none;
+border-radius:8px;background:#f48120;color:white;cursor:pointer;
 }
+input{padding:10px;margin:5px;border:none;border-radius:8px;}
 </style>
 </head>
 
 <body>
 
-<!-- ☁️ CLOUDFLARE LOADER -->
+<!-- LOADER -->
 <div id="loader">
 <div class="cf-logo">Cloudflare</div>
 <div class="loader-spin"></div>
 <h3>Checking your browser before accessing</h3>
 <p>choco-smp.site</p>
-<br>
-<p>Ray ID: 7x92ab123 • Performance & security by Cloudflare</p>
+<p>Ray ID: 7x92ab123 • Performance & security</p>
 </div>
 
 <!-- LOGIN -->
 <div id="loginPage">
-<h1>Choco SMP Login</h1>
+<h2>Choco SMP Login</h2>
 
 <div class="card">
 <h3>User Login</h3>
@@ -172,44 +97,77 @@ cursor:pointer;
 <!-- MAIN -->
 <div class="main" id="main">
 
+<!-- HOME -->
 <div id="home" class="card">
-<h2>Welcome Gamer 😎</h2>
+<h2>🎮 Welcome to Choco SMP 👑</h2>
+
+<div style="background:rgba(0,0,0,0.4);padding:15px;border-radius:10px;line-height:1.6;">
+<h3>👋 Hey New Charming Star</h3>
+
+<p>📘 Verify Yourself</p>
+<button>Verify</button>
+
+<p>📘 Server Info</p>
+<button>Info</button>
+
+<p>💬 Submit IGN</p>
+<button>Submit</button>
+
+<p>📚 Rules & FAQ</p>
+<button>Rules</button>
+
+<p>🎟️ Help Desk</p>
+<button>Help</button>
+
+<hr style="margin:10px 0;border:1px solid #333;">
+
+<p>🕹️ Thanks for joining CHOCO SMP!</p>
+<p>💻 IP: play.chocosmp.fun</p>
+</div>
+
 <p id="time"></p>
-
-<br>
-<p>🔥 SMP • Economy • Events</p>
-<p>👥 Players Online: 23</p>
 </div>
 
+<!-- SERVER -->
 <div id="server" class="card" style="display:none;">
-<h2>🎮 Server</h2>
+<h2>📢 SERVER INFO</h2>
+<p>Scripted SMP • Weekly weapons • Events • No hacking</p>
 <p>IP: play.chocosmp.fun</p>
-<button onclick="copyIP()">Copy IP</button>
-
-<br><br>
-<p>Version: 1.20+</p>
-<p>Status: Online</p>
 </div>
 
+<!-- COMMUNITY -->
 <div id="community" class="card" style="display:none;">
-<h2>🌐 Community</h2>
-<a href="https://discord.gg/dNhUUsaz75"><button>Discord</button></a>
-<a href="https://www.youtube.com/channel/UCMhd7jqZzvhtqrkVOqgrmKg"><button>YouTube</button></a>
-<a href="https://www.instagram.com/edit_with_awais/"><button>Instagram</button></a>
+
+<h2>💬 Chat Channels</h2>
+
+<button>General Chat</button>
+<button>Game Chat</button>
+<button>Meme</button>
+<button>Images</button>
+
+<h2 style="margin-top:20px;">🎤 Voice Channels</h2>
+
+<div>
+<p>🔊 Lobby <button>Join</button></p>
+<p>🎮 Gaming <button>Join</button></p>
+<p>⛏️ Minecraft <button>Join</button></p>
+<p>🔴 Live VC <button>Join</button></p>
 </div>
 
+</div>
+
+<!-- ADMIN -->
 <div id="adminPanel" class="card" style="display:none;">
-<h2>👑 Admin Panel</h2>
-<button>Start Server</button>
-<button>Stop Server</button>
-<button>Restart Server</button>
+<h2>Admin Panel</h2>
+<button>Start</button>
+<button>Stop</button>
 </div>
 
 </div>
 
 <!-- MUSIC -->
 <iframe width="0" height="0"
-src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA&controls=0"
+src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA"
 allow="autoplay"></iframe>
 
 <script>
@@ -219,13 +177,12 @@ loader.style.display="none";
 loginPage.style.display="flex";
 },3000);
 
-// LOGIN DATA
+// LOGIN
 const userE="chocosmp@gmail.com";
 const userP="chocosmp123";
 const adminE="admin@gmail.com";
 const adminP="admin2013";
 
-// LOGIN
 function loginUser(){
 if(userEmail.value===userE && userPass.value===userP){
 start("user");
@@ -265,11 +222,6 @@ function logout(){location.reload();}
 setInterval(()=>{
 time.innerText=new Date().toLocaleTimeString();
 },1000);
-
-function copyIP(){
-navigator.clipboard.writeText("play.chocosmp.fun");
-alert("Copied ✅");
-}
 </script>
 
 </body>
