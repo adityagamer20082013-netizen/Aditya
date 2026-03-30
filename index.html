@@ -7,7 +7,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
-body{background:#0f2027;color:white;overflow-x:hidden;}
+body{background:#0f2027;color:white;}
 
 /* LOADER */
 #loader{
@@ -16,13 +16,6 @@ background:#0c0d10;display:flex;
 justify-content:center;align-items:center;
 flex-direction:column;z-index:9999;
 }
-.loader-spin{
-border:4px solid #222;border-top:4px solid #f48120;
-border-radius:50%;width:50px;height:50px;
-animation:spin 1s linear infinite;margin:20px;
-}
-@keyframes spin{100%{transform:rotate(360deg);}}
-.cf-logo{color:#f48120;font-size:28px;font-weight:bold;}
 
 /* LOGIN */
 #loginPage{
@@ -33,11 +26,13 @@ flex-direction:column;
 
 /* SIDEBAR */
 .sidebar{
-position:fixed;left:0;top:0;width:200px;height:100%;
+position:fixed;width:200px;height:100%;
 background:#111;padding-top:20px;display:none;
 }
-.sidebar h2{text-align:center;color:#f48120;margin-bottom:20px;}
-.sidebar a{display:block;padding:12px;color:white;cursor:pointer;}
+.sidebar h2{text-align:center;color:#f48120;}
+.sidebar a{
+display:block;padding:12px;color:white;cursor:pointer;
+}
 .sidebar a:hover{background:#f48120;color:black;}
 
 /* MAIN */
@@ -51,10 +46,12 @@ padding:15px;margin:10px 0;border-radius:12px;
 
 /* BUTTON */
 button{
-padding:10px 20px;margin:5px;border:none;
-border-radius:8px;background:#f48120;color:white;cursor:pointer;
+padding:10px;margin:5px;border:none;
+border-radius:8px;background:#f48120;color:white;
+cursor:pointer;
 }
-input{padding:10px;margin:5px;border:none;border-radius:8px;}
+
+input{padding:10px;margin:5px;border-radius:8px;border:none;}
 </style>
 </head>
 
@@ -62,25 +59,22 @@ input{padding:10px;margin:5px;border:none;border-radius:8px;}
 
 <!-- LOADER -->
 <div id="loader">
-<div class="cf-logo">Cloudflare</div>
-<div class="loader-spin"></div>
-<h3>Checking your browser...</h3>
-<p>Ray ID: 7x92ab123</p>
+<h2>Checking your browser...</h2>
 </div>
 
 <!-- LOGIN -->
 <div id="loginPage">
-<h2>Choco SMP Login</h2>
+<h2>Login</h2>
 
 <div class="card">
-<h3>User Login</h3>
+<h3>User</h3>
 <input id="userEmail" placeholder="Email">
 <input id="userPass" type="password" placeholder="Password">
 <button onclick="loginUser()">Login</button>
 </div>
 
 <div class="card">
-<h3>Admin Login</h3>
+<h3>Admin</h3>
 <input id="adminEmail" placeholder="Email">
 <input id="adminPass" type="password" placeholder="Password">
 <button onclick="loginAdmin()">Login</button>
@@ -101,35 +95,49 @@ input{padding:10px;margin:5px;border:none;border-radius:8px;}
 
 <!-- HOME -->
 <div id="home" class="card">
-<h2>🎮 Welcome to CHOCO SMP 👑</h2>
-
-<div style="background:rgba(0,0,0,0.4);padding:15px;border-radius:10px;line-height:1.6;">
-<h3>👋 Hey New Charming Star</h3>
+<h2>🎮 Welcome to CHOCO SMP</h2>
 
 <a href="https://discord.com/channels/1483033610670964877/1483070767284621405" target="_blank"><button>Verify</button></a>
 <a href="https://discord.com/channels/1483033610670964877/1483064348115992597" target="_blank"><button>Server Info</button></a>
 <a href="https://discord.com/channels/1483033610670964877/1483069645622743073" target="_blank"><button>Submit IGN</button></a>
 <a href="https://discord.com/channels/1483033610670964877/1483064197968298145" target="_blank"><button>Rules</button></a>
-<a href="https://discord.com/channels/1483033610670964877/1483066579523604480" target="_blank"><button>Help Desk</button></a>
-
-<hr style="margin:10px 0;border:1px solid #333;">
-<p>💻 IP: play.chocosmp.fun</p>
-</div>
+<a href="https://discord.com/channels/1483033610670964877/1483066579523604480" target="_blank"><button>Help</button></a>
 
 <p id="time"></p>
 </div>
 
 <!-- SERVER -->
 <div id="server" class="card" style="display:none;">
-<h2>📢 Server Info</h2>
-<p>Scripted SMP • Events • Glory Weapons</p>
 
-<h2>📜 Rules</h2>
-<img src="https://i.imgur.com/8Km9tLL.png" style="width:100%;border-radius:10px;">
+<h2>🎮 Server</h2>
 
-<div style="background:rgba(0,0,0,0.4);padding:15px;border-radius:10px;">
-<p>Respect • No Hack • No Grief • Have Fun 🎮</p>
+<h3>💻 IP</h3>
+<p>play.chocosmp.fun</p>
+
+<div style="background:#111;padding:10px;border-radius:10px;margin-top:15px;">
+<h3>📜 #rules</h3>
+
+<img src="https://via.placeholder.com/800x200?text=CHOCO+SMP+RULES"
+style="width:100%;border-radius:8px;margin:10px 0;">
+
+<p>1. Respect everyone</p>
+<p>2. No hacking</p>
+<p>3. No griefing</p>
+<p>4. Follow teams</p>
+<p>5. No spam</p>
+<p>6. Be active</p>
+<p>7. Upload content</p>
+<p>8. No drama</p>
+<p>9. Follow staff</p>
+<p>10. No bugs</p>
+<p>11. Clean chat</p>
+<p>12. No ads</p>
+<p>13. Respect decisions</p>
+<p>14. No impersonation</p>
+<p>15. Have fun 🎮</p>
+
 </div>
+
 </div>
 
 <!-- COMMUNITY -->
@@ -138,27 +146,30 @@ input{padding:10px;margin:5px;border:none;border-radius:8px;}
 <h2>💬 Chat</h2>
 
 <a href="https://discord.com/channels/1483033610670964877/1483064156461469706" target="_blank">
-<button>General Chat</button>
-</a>
+<button>General</button></a>
 
 <a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Game Chat</button>
-</a>
+<button>Game</button></a>
 
 <a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Meme</button>
-</a>
+<button>Meme</button></a>
 
 <a href="https://discord.gg/dNhUUsaz75" target="_blank">
-<button>Images</button>
-</a>
+<button>Images</button></a>
 
-<h2 style="margin-top:20px;">🎤 Voice</h2>
+<h2>🎤 Voice</h2>
 
-<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>🔊 Lobby <button>Join</button></p></a>
-<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>🎮 Gaming <button>Join</button></p></a>
-<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>⛏️ Minecraft <button>Join</button></p></a>
-<a href="https://discord.gg/dNhUUsaz75" target="_blank"><p>🔴 Live VC <button>Join</button></p></a>
+<a href="https://discord.gg/dNhUUsaz75" target="_blank">
+<button>Lobby</button></a>
+
+<a href="https://discord.gg/dNhUUsaz75" target="_blank">
+<button>Gaming</button></a>
+
+<a href="https://discord.gg/dNhUUsaz75" target="_blank">
+<button>Minecraft</button></a>
+
+<a href="https://discord.gg/dNhUUsaz75" target="_blank">
+<button>Live VC</button></a>
 
 </div>
 
@@ -180,7 +191,7 @@ allow="autoplay"></iframe>
 setTimeout(()=>{
 loader.style.display="none";
 loginPage.style.display="flex";
-},3000);
+},2000);
 
 const userE="chocosmp@gmail.com";
 const userP="chocosmp123";
@@ -214,11 +225,12 @@ showPage("home");
 
 function showPage(p){
 hideAll();
+document.querySelectorAll(".main .card").forEach(e=>e.style.display="none");
 document.getElementById(p).style.display="block";
 }
 
 function hideAll(){
-document.querySelectorAll(".main .card").forEach(el=>el.style.display="none");
+document.querySelectorAll(".main .card").forEach(e=>e.style.display="none");
 }
 
 function logout(){location.reload();}
