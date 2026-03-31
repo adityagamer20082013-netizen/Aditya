@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,26 +11,31 @@
 /* CLOUDFARE */
 #loader{
 position:fixed;width:100%;height:100%;
-background:white;display:flex;justify-content:center;
-align-items:center;z-index:9999;
+background:#fff;display:flex;justify-content:center;align-items:center;z-index:9999;
 }
 .cf-box{text-align:center;color:black;}
 .cf-logo{font-size:28px;color:#f48120;font-weight:bold;}
-.cf-bar{width:200px;height:6px;background:#eee;margin:10px auto;border-radius:10px;overflow:hidden;}
+.cf-bar{width:220px;height:6px;background:#eee;margin:10px auto;border-radius:10px;overflow:hidden;}
 .cf-fill{width:0;height:100%;background:#f48120;animation:load 3s forwards;}
 @keyframes load{100%{width:100%;}}
 
 /* LOGIN */
 #loginPage{
 display:none;height:100vh;background:#0f2027;color:white;
-justify-content:center;align-items:center;flex-direction:column;
+display:flex;justify-content:center;align-items:center;flex-direction:column;
 }
+.login-box{
+background:#111;padding:20px;border-radius:12px;margin:10px;
+}
+input{padding:10px;margin:5px;border:none;border-radius:8px;}
+button{padding:10px;border:none;border-radius:8px;background:#f48120;color:white;cursor:pointer;}
 
 /* SIDEBAR */
 .sidebar{
 position:fixed;width:200px;height:100%;
 background:#111;padding-top:20px;display:none;
 }
+.sidebar h2{text-align:center;color:#f48120;}
 .sidebar a{display:block;padding:12px;color:white;cursor:pointer;}
 .sidebar a:hover{background:#f48120;}
 
@@ -41,20 +46,12 @@ display:none;background:#0f2027;color:white;min-height:100vh;
 
 .card{
 background:rgba(255,255,255,0.05);
-padding:15px;margin:10px 0;border-radius:10px;
+padding:15px;margin:10px 0;border-radius:12px;
 }
-
-button{
-padding:8px 12px;border:none;border-radius:6px;
-background:#f48120;color:white;cursor:pointer;
-}
-
-input{padding:8px;border-radius:6px;border:none;margin:3px;}
 
 /* CHAT */
 #chatBox{
-height:250px;overflow:auto;
-background:#111;padding:10px;border-radius:10px;
+height:260px;overflow:auto;background:#111;padding:10px;border-radius:10px;
 }
 .msg{margin-bottom:10px;}
 .msg img{width:120px;border-radius:6px;margin-top:5px;}
@@ -74,17 +71,30 @@ background:#111;padding:10px;border-radius:10px;
 
 <!-- LOGIN -->
 <div id="loginPage">
-<h2>Login</h2>
+<h2>Choco SMP Login</h2>
+
+<div class="login-box">
+<h3>User Login</h3>
 <input id="userEmail" placeholder="Email">
 <input id="userPass" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
+<button onclick="loginUser()">Login</button>
+</div>
+
+<div class="login-box">
+<h3>Admin Login</h3>
+<input id="adminEmail" placeholder="Email">
+<input id="adminPass" type="password" placeholder="Password">
+<button onclick="loginAdmin()">Login</button>
+</div>
 </div>
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-<a onclick="show('home')">Home</a>
-<a onclick="show('server')">Server</a>
-<a onclick="show('community')">Community</a>
+<h2>Choco SMP</h2>
+<a onclick="showPage('home')">Home</a>
+<a onclick="showPage('server')">Server</a>
+<a onclick="showPage('community')">Community</a>
+<button onclick="logout()">Logout</button>
 </div>
 
 <!-- MAIN -->
@@ -92,17 +102,28 @@ background:#111;padding:10px;border-radius:10px;
 
 <!-- HOME -->
 <div id="home" class="card">
-<h2>Welcome to Choco SMP</h2>
+<h2>🎮 Welcome to CHOCO SMP</h2>
+
+<a href="#"><button>Verify</button></a>
+<a href="#"><button>Server Info</button></a>
+<a href="#"><button>Submit IGN</button></a>
+<a href="#"><button>Rules</button></a>
+<a href="#"><button>Help</button></a>
+
 <p id="time"></p>
 </div>
 
 <!-- SERVER -->
 <div id="server" class="card" style="display:none;">
+<h2>🎮 Server</h2>
 <h3>IP: play.chocosmp.fun</h3>
 
 <div style="background:#111;padding:10px;border-radius:10px;">
 <h3>#rules</h3>
-<img src="https://via.placeholder.com/800x200?text=CHOCO+SMP+RULES" style="width:100%;border-radius:8px;">
+
+<img src="https://via.placeholder.com/800x200?text=CHOCO+SMP+RULES"
+style="width:100%;border-radius:8px;">
+
 <p>Respect • No Hack • No Grief • Have Fun</p>
 </div>
 </div>
@@ -121,6 +142,13 @@ background:#111;padding:10px;border-radius:10px;
 
 </div>
 
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="card" style="display:none;">
+<h2>Admin Panel</h2>
+<button>Start Server</button>
+<button>Stop Server</button>
+</div>
+
 </div>
 
 <!-- MUSIC -->
@@ -134,18 +162,38 @@ loader.style.display="none";
 loginPage.style.display="flex";
 },3000);
 
-function login(){
+const adminPass="admin2013";
+
+function loginUser(){
+start("user");
+}
+
+function loginAdmin(){
+if(document.getElementById("adminPass").value===adminPass){
+start("admin");
+}else alert("Wrong Admin Password");
+}
+
+function start(type){
 loginPage.style.display="none";
 sidebar.style.display="block";
 main.style.display="block";
+
+if(type==="admin"){
+showPage("adminPanel");
+}else{
+showPage("home");
+}
 }
 
-function show(id){
+function showPage(id){
 document.querySelectorAll(".card").forEach(c=>c.style.display="none");
 document.getElementById(id).style.display="block";
 }
 
-/* CHAT SYSTEM */
+function logout(){location.reload();}
+
+/* CHAT */
 let messages=[];
 
 function send(){
@@ -153,18 +201,18 @@ let name=document.getElementById("name").value||"User";
 let text=document.getElementById("msg").value;
 let file=document.getElementById("img").files[0];
 
-let msgObj={name,text,time:Date.now()};
+let obj={name,text,time:Date.now()};
 
 if(file){
 let reader=new FileReader();
 reader.onload=e=>{
-msgObj.img=e.target.result;
-messages.push(msgObj);
+obj.img=e.target.result;
+messages.push(obj);
 render();
 };
 reader.readAsDataURL(file);
 }else{
-messages.push(msgObj);
+messages.push(obj);
 render();
 }
 
@@ -186,8 +234,6 @@ div.innerHTML="<b>"+m.name+":</b> "+(m.text||"");
 if(m.img) div.innerHTML+="<br><img src='"+m.img+"'>";
 box.appendChild(div);
 });
-
-box.scrollTop=box.scrollHeight;
 }
 
 setInterval(render,2000);
@@ -198,4 +244,4 @@ time.innerText=new Date().toLocaleTimeString();
 </script>
 
 </body>
-</html> 
+</html>
