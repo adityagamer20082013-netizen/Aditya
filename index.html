@@ -8,106 +8,106 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
 
-/* CLOUDFARE */
+/* CLOUDFLARE */
 #loader{
 position:fixed;width:100%;height:100%;
 background:#fff;display:flex;justify-content:center;align-items:center;z-index:9999;
 }
-.cf-box{text-align:center;color:black;}
-.cf-logo{font-size:28px;color:#f48120;font-weight:bold;}
-.cf-bar{width:220px;height:6px;background:#eee;margin:10px auto;border-radius:10px;overflow:hidden;}
-.cf-fill{width:0;height:100%;background:#f48120;animation:load 3s forwards;}
+.cf{text-align:center;color:black;}
+.cf h1{color:#f48120;}
+.cf-bar{width:220px;height:6px;background:#eee;margin:10px auto;border-radius:10px;}
+.cf-fill{height:100%;background:#f48120;width:0%;animation:load 3s forwards;}
 @keyframes load{100%{width:100%;}}
 
 /* LOGIN */
 #loginPage{
 display:none;height:100vh;background:#0f2027;color:white;
-justify-content:center;align-items:center;flex-direction:column;
+display:flex;justify-content:center;align-items:center;flex-direction:column;
 }
 .login-box{background:#111;padding:20px;border-radius:12px;margin:10px;}
 
-input{padding:10px;margin:5px;border:none;border-radius:8px;width:200px;}
-button{padding:10px;border:none;border-radius:8px;background:#f48120;color:white;cursor:pointer;}
+input{padding:12px;margin:6px;border:none;border-radius:8px;width:220px;}
+button{padding:12px 18px;margin:6px;border:none;border-radius:8px;background:#f48120;color:white;cursor:pointer;font-size:15px;}
 
-/* USER SIDEBAR */
+/* USER */
 .sidebar{
-position:fixed;width:220px;height:100%;
+position:fixed;width:230px;height:100%;
 background:#111;padding-top:20px;display:none;
 }
-.sidebar a{display:block;padding:15px;color:white;cursor:pointer;}
+.sidebar a{display:block;padding:16px;color:white;font-size:16px;cursor:pointer;}
 .sidebar a:hover{background:#f48120;}
 
 .main{
-margin-left:220px;padding:20px;display:none;background:#0f2027;color:white;min-height:100vh;
+margin-left:230px;padding:20px;display:none;background:#0f2027;color:white;min-height:100vh;
 }
 
-/* ADMIN PANEL */
-.admin{
-display:none;background:#0d1117;color:white;height:100vh;
+.card{
+background:rgba(255,255,255,0.05);
+padding:20px;margin:10px 0;border-radius:12px;
 }
+
+/* CHAT */
+#chatBox{
+height:260px;overflow:auto;background:#111;padding:10px;border-radius:10px;
+}
+.msg img{width:140px;margin-top:5px;border-radius:6px;}
+
+/* VC */
+.vc button{
+display:block;width:100%;margin:8px 0;padding:14px;font-size:16px;
+}
+
+/* ADMIN */
+.admin{display:none;background:#0d1117;color:white;height:100vh;}
 .admin-sidebar{
-width:220px;background:#111;position:fixed;height:100%;
+width:230px;background:#111;position:fixed;height:100%;
 padding:10px;
 }
-.admin-sidebar h2{color:#f48120;}
 .admin-sidebar div{
-padding:12px;margin-top:10px;cursor:pointer;
+padding:14px;margin-top:8px;cursor:pointer;
 }
 .admin-sidebar div:hover{background:#f48120;}
 
-.admin-main{
-margin-left:220px;padding:20px;
+.admin-main{margin-left:230px;padding:20px;}
+
+.bar{height:8px;background:#333;border-radius:10px;margin:6px 0;}
+.bar div{height:100%;background:#f48120;width:0%;}
+
+#console,#logBox{
+height:220px;background:black;color:#0f0;padding:10px;overflow:auto;font-family:monospace;
 }
 
-/* CARDS */
-.card{
-background:#161b22;padding:15px;border-radius:10px;margin:10px 0;
-}
-
-/* CONSOLE */
-#console{
-height:200px;background:black;color:#0f0;padding:10px;overflow:auto;font-family:monospace;
-}
-
-/* STATS */
-.stat{
-background:#161b22;padding:15px;border-radius:10px;margin:10px 0;
-}
-.bar{
-height:8px;background:#333;border-radius:10px;overflow:hidden;margin-top:5px;
-}
-.fill{
-height:100%;background:#f48120;width:0%;
-}
+.file{padding:10px;border-bottom:1px solid #333;}
 </style>
 </head>
 
 <body>
 
-<!-- CLOUDFARE -->
+<!-- CLOUDFLARE -->
 <div id="loader">
-<div class="cf-box">
-<div class="cf-logo">Cloudflare</div>
-<div class="cf-bar"><div class="cf-fill"></div></div>
+<div class="cf">
+<h1>Cloudflare</h1>
 <p>Checking your browser...</p>
+<p>Ray ID: <span id="ray"></span></p>
+<div class="cf-bar"><div class="cf-fill"></div></div>
 </div>
 </div>
 
 <!-- LOGIN -->
 <div id="loginPage">
-<h2>Login</h2>
+<h2>Choco SMP Login</h2>
 
 <div class="login-box">
 <h3>User</h3>
-<input id="userEmail">
-<input id="userPass" type="password">
+<input id="userEmail" placeholder="Email">
+<input id="userPass" type="password" placeholder="Password">
 <button onclick="loginUser()">Login</button>
 </div>
 
 <div class="login-box">
 <h3>Admin</h3>
-<input id="adminEmail">
-<input id="adminPass" type="password">
+<input id="adminEmail" placeholder="Email">
+<input id="adminPass" type="password" placeholder="Password">
 <button onclick="loginAdmin()">Login</button>
 </div>
 </div>
@@ -121,50 +121,72 @@ height:100%;background:#f48120;width:0%;
 </div>
 
 <div class="main" id="main">
-<div id="home">Welcome 👑</div>
-<div id="server" style="display:none;">IP: play.chocosmp.fun</div>
 
-<div id="community" style="display:none;">
-<h3>Chat</h3>
-<div id="chatBox"></div>
-<input id="msg"><button onclick="send()">Send</button>
+<div id="home" class="card">
+<h2>Welcome to CHOCO SMP</h2>
+<p id="time"></p>
 </div>
+
+<div id="server" class="card" style="display:none;">
+<h3>IP: play.chocosmp.fun</h3>
+
+<h3>Rules</h3>
+<p>1. Respect everyone</p>
+<p>2. No hacking</p>
+<p>3. No griefing</p>
+<p>4. Follow teams</p>
+<p>5. No spam</p>
+<p>6. Be active</p>
+<p>7. Upload content</p>
+<p>8. No drama</p>
+<p>9. Follow staff</p>
+<p>10. No exploits</p>
+<p>11. Keep chat clean</p>
+<p>12. No ads</p>
+<p>13. Respect decisions</p>
+<p>14. No impersonation</p>
+<p>15. Have fun</p>
+</div>
+
+<div id="community" class="card" style="display:none;">
+<h3>General Chat</h3>
+<div id="chatBox"></div>
+
+<input id="msg">
+<button onclick="send()">Send</button>
+
+<div class="vc">
+<h3>Voice Channels</h3>
+<button>Lobby VC</button>
+<button>Gaming VC</button>
+<button>Minecraft VC</button>
+<button>Live VC</button>
+</div>
+</div>
+
 </div>
 
 <!-- ADMIN -->
 <div class="admin" id="admin">
 
 <div class="admin-sidebar">
-<h2>Admin</h2>
-<div onclick="openTab('dashboard')">Dashboard</div>
+<div onclick="openTab('dash')">Dashboard</div>
 <div onclick="openTab('consoleTab')">Console</div>
-<div onclick="openTab('settings')">Settings</div>
+<div onclick="openTab('files')">Files</div>
+<div onclick="openTab('logs')">Activity</div>
 </div>
 
 <div class="admin-main">
 
-<div id="dashboard">
-<div class="card">
+<div id="dash">
 <h3>Status: <span id="status">Stopped</span></h3>
 <button onclick="startServer()">Start</button>
 <button onclick="stopServer()">Stop</button>
-</div>
 
-<div class="stat">
-CPU
-<div class="bar"><div class="fill" id="cpu"></div></div>
-</div>
-
-<div class="stat">
-RAM
-<div class="bar"><div class="fill" id="ram"></div></div>
-</div>
-
-<div class="stat">
-Network
-<div class="bar"><div class="fill" id="net"></div></div>
-</div>
-
+<h4>CPU</h4><div class="bar"><div id="cpu"></div></div>
+<h4>RAM</h4><div class="bar"><div id="ram"></div></div>
+<h4>DISK</h4><div class="bar"><div id="disk"></div></div>
+<h4>NETWORK</h4><div class="bar"><div id="net"></div></div>
 </div>
 
 <div id="consoleTab" style="display:none;">
@@ -172,19 +194,36 @@ Network
 <input id="cmd"><button onclick="runCmd()">Run</button>
 </div>
 
+<div id="files" style="display:none;">
+<div class="file">server.jar</div>
+<div class="file">plugins/</div>
+<div class="file">world/</div>
+<div class="file">logs/</div>
+</div>
+
+<div id="logs" style="display:none;">
+<div id="logBox"></div>
+</div>
+
 </div>
 </div>
 
 <script>
-setTimeout(()=>{loader.style.display="none";loginPage.style.display="flex";},3000);
+document.getElementById("ray").innerText=Math.random().toString(36).substring(2,10);
 
+setTimeout(()=>{
+loader.style.display="none";
+loginPage.style.display="flex";
+},3000);
+
+/* LOGIN */
 const userEmail="chocosmp@gmail.com";
 const userPass="chocosmp123";
 const adminEmail="admin@gmail.com";
 const adminPass="admin2013";
 
 function loginUser(){
-if(userEmail==userEmail && userPass==userPass){
+if(userEmail===userEmail){
 loginPage.style.display="none";
 sidebar.style.display="block";
 main.style.display="block";
@@ -198,44 +237,64 @@ document.getElementById("adminPass").value===adminPass
 ){
 loginPage.style.display="none";
 admin.style.display="block";
+addLog("Admin logged in");
 }
 }
 
 function showPage(id){
-document.querySelectorAll("#main div").forEach(d=>d.style.display="none");
+document.querySelectorAll(".main .card").forEach(c=>c.style.display="none");
 document.getElementById(id).style.display="block";
 }
 
 function logout(){location.reload();}
 
-/* SERVER */
+/* CHAT */
+let messages=[];
+function send(){
+let msg=document.getElementById("msg").value;
+messages.push(msg);
+chatBox.innerHTML+=`<div>${msg}</div>`;
+}
+
+/* ADMIN */
+function openTab(id){
+document.querySelectorAll(".admin-main > div").forEach(d=>d.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
 function startServer(){
 status.innerText="Starting...";
-setTimeout(()=>{status.innerText="Running";},2000);
+addLog("Server starting...");
+setTimeout(()=>{status.innerText="Running";addLog("Server running");},2000);
 }
 
 function stopServer(){
 status.innerText="Stopped";
+addLog("Server stopped");
+}
+
+function runCmd(){
+let c=cmd.value;
+console.innerHTML+=`<div>> ${c}</div>`;
+addLog("Command: "+c);
+}
+
+function addLog(t){
+logBox.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] ${t}</div>`;
 }
 
 /* STATS */
 setInterval(()=>{
 cpu.style.width=Math.random()*100+"%";
 ram.style.width=Math.random()*100+"%";
+disk.style.width=Math.random()*100+"%";
 net.style.width=Math.random()*100+"%";
 },1000);
 
-/* CONSOLE */
-function runCmd(){
-let cmd=document.getElementById("cmd").value;
-console.innerHTML+="<div>> "+cmd+"</div><div>Executed ✔️</div>";
-}
-
-/* ADMIN TABS */
-function openTab(id){
-document.querySelectorAll(".admin-main > div").forEach(d=>d.style.display="none");
-document.getElementById(id).style.display="block";
-}
+/* TIME */
+setInterval(()=>{
+time.innerText=new Date().toLocaleTimeString();
+},1000);
 </script>
 
 </body>
