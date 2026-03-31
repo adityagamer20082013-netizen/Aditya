@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -22,28 +22,38 @@ background:#fff;display:flex;justify-content:center;align-items:center;z-index:9
 /* LOGIN */
 #loginPage{
 display:none;height:100vh;background:#0f2027;color:white;
-display:flex;justify-content:center;align-items:center;flex-direction:column;
+justify-content:center;align-items:center;flex-direction:column;
 }
-.login-box{
-background:#111;padding:20px;border-radius:12px;margin:10px;
-}
-input{padding:10px;margin:5px;border:none;border-radius:8px;}
-button{padding:10px;border:none;border-radius:8px;background:#f48120;color:white;cursor:pointer;}
+.login-box{background:#111;padding:20px;border-radius:12px;margin:10px;}
+
+input{padding:10px;margin:5px;border:none;border-radius:8px;width:200px;}
+button{padding:12px 16px;margin:5px;border:none;border-radius:8px;background:#f48120;color:white;cursor:pointer;font-size:14px;}
 
 /* SIDEBAR */
 .sidebar{
-position:fixed;width:200px;height:100%;
+position:fixed;width:220px;height:100%;
 background:#111;padding-top:20px;display:none;
 }
-.sidebar h2{text-align:center;color:#f48120;}
-.sidebar a{display:block;padding:12px;color:white;cursor:pointer;}
+.sidebar h2{text-align:center;color:#f48120;margin-bottom:10px;}
+.sidebar a{
+display:block;
+padding:15px;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
 .sidebar a:hover{background:#f48120;}
 
 .main{
-margin-left:200px;padding:20px;
-display:none;background:#0f2027;color:white;min-height:100vh;
+margin-left:220px;
+padding:20px;
+display:none;
+background:#0f2027;
+color:white;
+min-height:100vh;
 }
 
+/* CARD */
 .card{
 background:rgba(255,255,255,0.05);
 padding:15px;margin:10px 0;border-radius:12px;
@@ -82,8 +92,7 @@ height:260px;overflow:auto;background:#111;padding:10px;border-radius:10px;
 
 <div class="login-box">
 <h3>Admin Login</h3>
-<input id="adminEmail" placeholder="Email">
-<input id="adminPass" type="password" placeholder="Password">
+<input id="adminPass" type="password" placeholder="Admin Password">
 <button onclick="loginAdmin()">Login</button>
 </div>
 </div>
@@ -103,35 +112,44 @@ height:260px;overflow:auto;background:#111;padding:10px;border-radius:10px;
 <!-- HOME -->
 <div id="home" class="card">
 <h2>🎮 Welcome to CHOCO SMP</h2>
-
-<a href="#"><button>Verify</button></a>
-<a href="#"><button>Server Info</button></a>
-<a href="#"><button>Submit IGN</button></a>
-<a href="#"><button>Rules</button></a>
-<a href="#"><button>Help</button></a>
-
 <p id="time"></p>
 </div>
 
 <!-- SERVER -->
 <div id="server" class="card" style="display:none;">
 <h2>🎮 Server</h2>
-<h3>IP: play.chocosmp.fun</h3>
 
-<div style="background:#111;padding:10px;border-radius:10px;">
-<h3>#rules</h3>
+<h3>💻 IP</h3>
+<p>play.chocosmp.fun</p>
+
+<div style="background:#111;padding:10px;border-radius:10px;margin-top:15px;">
+<h3>📜 #rules</h3>
 
 <img src="https://via.placeholder.com/800x200?text=CHOCO+SMP+RULES"
-style="width:100%;border-radius:8px;">
+style="width:100%;border-radius:8px;margin:10px 0;">
 
-<p>Respect • No Hack • No Grief • Have Fun</p>
+<p>1. Respect everyone</p>
+<p>2. No hacking or cheating</p>
+<p>3. No griefing</p>
+<p>4. Follow team rules</p>
+<p>5. No spamming</p>
+<p>6. Be active</p>
+<p>7. Upload YouTube content</p>
+<p>8. No drama</p>
+<p>9. Follow staff instructions</p>
+<p>10. No exploiting bugs</p>
+<p>11. Keep chat clean</p>
+<p>12. No advertising</p>
+<p>13. Respect decisions</p>
+<p>14. No impersonation</p>
+<p>15. Have fun 🎮</p>
 </div>
 </div>
 
 <!-- COMMUNITY -->
 <div id="community" class="card" style="display:none;">
 
-<h3>💬 Chat</h3>
+<h3>💬 General Chat</h3>
 
 <input id="name" placeholder="Name">
 <div id="chatBox"></div>
@@ -140,9 +158,16 @@ style="width:100%;border-radius:8px;">
 <input type="file" id="img">
 <button onclick="send()">Send</button>
 
+<h3 style="margin-top:20px;">🎤 Voice Channels</h3>
+
+<button>Lobby VC</button>
+<button>Gaming VC</button>
+<button>Minecraft VC</button>
+<button>Live VC</button>
+
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ADMIN -->
 <div id="adminPanel" class="card" style="display:none;">
 <h2>Admin Panel</h2>
 <button>Start Server</button>
@@ -150,11 +175,6 @@ style="width:100%;border-radius:8px;">
 </div>
 
 </div>
-
-<!-- MUSIC -->
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/Ex49z5brxbA?autoplay=1&loop=1&playlist=Ex49z5brxbA"
-allow="autoplay"></iframe>
 
 <script>
 setTimeout(()=>{
@@ -244,4 +264,4 @@ time.innerText=new Date().toLocaleTimeString();
 </script>
 
 </body>
-</html>
+</html> 
