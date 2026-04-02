@@ -6,78 +6,63 @@
 <title>Choco SMP</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 
 /* CLOUDFLARE */
 #loader{
-position:fixed;width:100%;height:100%;
-background:#fff;display:flex;justify-content:center;align-items:center;z-index:9999;
+position:fixed;width:100%;height:100%;background:white;
+display:flex;justify-content:center;align-items:center;z-index:9999;
 }
-.cf{text-align:center;color:black;}
-.cf h1{color:#f48120;}
-.cf-bar{width:220px;height:6px;background:#eee;margin:10px auto;border-radius:10px;}
-.cf-fill{height:100%;background:#f48120;width:0%;animation:load 3s forwards;}
-@keyframes load{100%{width:100%;}}
+.cf{text-align:center}
+.cf h1{color:#f48120}
+.bar{width:220px;height:6px;background:#eee;margin:10px auto;border-radius:10px}
+.fill{height:100%;background:#f48120;width:0%;animation:load 3s forwards}
+@keyframes load{100%{width:100%}}
 
 /* LOGIN */
-#loginPage{
-display:none;height:100vh;background:#0f2027;color:white;
-display:flex;justify-content:center;align-items:center;flex-direction:column;
-}
-.login-box{background:#111;padding:20px;border-radius:12px;margin:10px;}
-
-input{padding:12px;margin:6px;border:none;border-radius:8px;width:220px;}
-button{padding:12px 18px;margin:6px;border:none;border-radius:8px;background:#f48120;color:white;cursor:pointer;font-size:15px;}
+#loginPage{display:none;height:100vh;background:#0f2027;color:white;
+display:flex;justify-content:center;align-items:center;flex-direction:column}
+.login-box{background:#111;padding:20px;border-radius:10px;margin:10px}
+input{padding:10px;margin:5px;border-radius:6px;border:none}
+button{padding:10px 15px;margin:5px;border:none;border-radius:6px;cursor:pointer}
 
 /* USER */
-.sidebar{
-position:fixed;width:230px;height:100%;
-background:#111;padding-top:20px;display:none;
-}
-.sidebar a{display:block;padding:16px;color:white;font-size:16px;cursor:pointer;}
-.sidebar a:hover{background:#f48120;}
-
-.main{
-margin-left:230px;padding:20px;display:none;background:#0f2027;color:white;min-height:100vh;
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-padding:20px;margin:10px 0;border-radius:12px;
-}
+.sidebar{position:fixed;width:230px;height:100%;background:#111;display:none}
+.sidebar a{display:block;padding:15px;color:white;cursor:pointer}
+.sidebar a:hover{background:#f48120}
+.main{margin-left:230px;padding:20px;background:#0f2027;color:white;min-height:100vh;display:none}
+.card{background:#1a1a1a;padding:20px;border-radius:10px;margin:10px 0}
 
 /* CHAT */
-#chatBox{
-height:260px;overflow:auto;background:#111;padding:10px;border-radius:10px;
-}
-.msg img{width:140px;margin-top:5px;border-radius:6px;}
+#chatBox{height:250px;overflow:auto;background:black;padding:10px}
+.msg img{width:120px}
 
 /* VC */
-.vc button{
-display:block;width:100%;margin:8px 0;padding:14px;font-size:16px;
-}
+.vc button{display:block;width:100%;padding:12px;margin:5px 0;background:#f48120;color:white}
 
 /* ADMIN */
-.admin{display:none;background:#0d1117;color:white;height:100vh;}
-.admin-sidebar{
-width:230px;background:#111;position:fixed;height:100%;
-padding:10px;
-}
-.admin-sidebar div{
-padding:14px;margin-top:8px;cursor:pointer;
-}
-.admin-sidebar div:hover{background:#f48120;}
+.admin{display:none;background:#0d1117;color:white;height:100vh}
+.admin-side{width:230px;background:#111;height:100%;position:fixed}
+.admin-side div{padding:15px;cursor:pointer}
+.admin-side div:hover{background:#ff7b00}
+.admin-main{margin-left:230px;padding:20px}
 
-.admin-main{margin-left:230px;padding:20px;}
+/* STATUS */
+.start{background:green;color:white}
+.stop{background:red;color:white}
 
-.bar{height:8px;background:#333;border-radius:10px;margin:6px 0;}
-.bar div{height:100%;background:#f48120;width:0%;}
+/* STATS */
+.stat{height:10px;background:#333;border-radius:10px;margin:10px 0}
+.stat div{height:100%;background:#ff7b00;width:0%}
 
-#console,#logBox{
-height:220px;background:black;color:#0f0;padding:10px;overflow:auto;font-family:monospace;
-}
+/* CONSOLE */
+#console{height:350px;background:black;color:#0f0;padding:10px;overflow:auto}
 
-.file{padding:10px;border-bottom:1px solid #333;}
+/* LOG */
+#logs{height:250px;background:black;color:#0f0;padding:10px;overflow:auto}
+
+/* FILE */
+.file{padding:10px;border-bottom:1px solid #333}
 </style>
 </head>
 
@@ -89,7 +74,7 @@ height:220px;background:black;color:#0f0;padding:10px;overflow:auto;font-family:
 <h1>Cloudflare</h1>
 <p>Checking your browser...</p>
 <p>Ray ID: <span id="ray"></span></p>
-<div class="cf-bar"><div class="cf-fill"></div></div>
+<div class="bar"><div class="fill"></div></div>
 </div>
 </div>
 
@@ -99,64 +84,62 @@ height:220px;background:black;color:#0f0;padding:10px;overflow:auto;font-family:
 
 <div class="login-box">
 <h3>User</h3>
-<input id="userEmail" placeholder="Email">
-<input id="userPass" type="password" placeholder="Password">
+<input id="uEmail" placeholder="Email">
+<input id="uPass" type="password" placeholder="Password">
 <button onclick="loginUser()">Login</button>
 </div>
 
 <div class="login-box">
 <h3>Admin</h3>
-<input id="adminEmail" placeholder="Email">
-<input id="adminPass" type="password" placeholder="Password">
+<input id="aEmail" placeholder="Email">
+<input id="aPass" type="password" placeholder="Password">
 <button onclick="loginAdmin()">Login</button>
 </div>
 </div>
 
 <!-- USER -->
 <div class="sidebar" id="sidebar">
-<a onclick="showPage('home')">Home</a>
-<a onclick="showPage('server')">Server</a>
-<a onclick="showPage('community')">Community</a>
+<a onclick="show('home')">Home</a>
+<a onclick="show('server')">Server</a>
+<a onclick="show('community')">Community</a>
 <button onclick="logout()">Logout</button>
 </div>
 
 <div class="main" id="main">
 
 <div id="home" class="card">
-<h2>Welcome to CHOCO SMP</h2>
+<h2>🎮 Welcome to CHOCO SMP</h2>
 <p id="time"></p>
 </div>
 
-<div id="server" class="card" style="display:none;">
-<h3>IP: play.chocosmp.fun</h3>
-
-<h3>Rules</h3>
-<p>1. Respect everyone</p>
-<p>2. No hacking</p>
-<p>3. No griefing</p>
-<p>4. Follow teams</p>
-<p>5. No spam</p>
-<p>6. Be active</p>
-<p>7. Upload content</p>
-<p>8. No drama</p>
-<p>9. Follow staff</p>
-<p>10. No exploits</p>
-<p>11. Keep chat clean</p>
-<p>12. No ads</p>
-<p>13. Respect decisions</p>
-<p>14. No impersonation</p>
-<p>15. Have fun</p>
+<div id="server" class="card" style="display:none">
+<h3>💻 IP: play.chocosmp.fun</h3>
+<h3>📜 Rules</h3>
+<p>1. Respect Everyone</p>
+<p>2. No Hacking</p>
+<p>3. No Griefing</p>
+<p>4. Follow Teams</p>
+<p>5. No Spamming</p>
+<p>6. Be Active</p>
+<p>7. Upload Content</p>
+<p>8. No Drama</p>
+<p>9. Follow Staff</p>
+<p>10. No Exploits</p>
+<p>11. Keep Chat Clean</p>
+<p>12. No Ads</p>
+<p>13. Respect Decisions</p>
+<p>14. No Impersonation</p>
+<p>15. Have Fun 🎮</p>
 </div>
 
-<div id="community" class="card" style="display:none;">
-<h3>General Chat</h3>
+<div id="community" class="card" style="display:none">
+<h3>💬 Chat</h3>
 <div id="chatBox"></div>
-
-<input id="msg">
+<input id="msg"><input type="file" id="img">
 <button onclick="send()">Send</button>
 
 <div class="vc">
-<h3>Voice Channels</h3>
+<h3>🎤 Voice Channels</h3>
 <button>Lobby VC</button>
 <button>Gaming VC</button>
 <button>Minecraft VC</button>
@@ -168,41 +151,40 @@ height:220px;background:black;color:#0f0;padding:10px;overflow:auto;font-family:
 
 <!-- ADMIN -->
 <div class="admin" id="admin">
-
-<div class="admin-sidebar">
-<div onclick="openTab('dash')">Dashboard</div>
-<div onclick="openTab('consoleTab')">Console</div>
-<div onclick="openTab('files')">Files</div>
-<div onclick="openTab('logs')">Activity</div>
+<div class="admin-side">
+<div onclick="tab('dash')">Dashboard</div>
+<div onclick="tab('consoleTab')">Console</div>
+<div onclick="tab('files')">Files</div>
+<div onclick="tab('logsTab')">Activity</div>
 </div>
 
 <div class="admin-main">
 
 <div id="dash">
-<h3>Status: <span id="status">Stopped</span></h3>
-<button onclick="startServer()">Start</button>
-<button onclick="stopServer()">Stop</button>
+<h2>Status: <span id="status">Stopped</span></h2>
+<button class="start" onclick="startServer()">Start</button>
+<button class="stop" onclick="stopServer()">Stop</button>
 
-<h4>CPU</h4><div class="bar"><div id="cpu"></div></div>
-<h4>RAM</h4><div class="bar"><div id="ram"></div></div>
-<h4>DISK</h4><div class="bar"><div id="disk"></div></div>
-<h4>NETWORK</h4><div class="bar"><div id="net"></div></div>
+<h3>CPU</h3><div class="stat"><div id="cpu"></div></div>
+<h3>RAM</h3><div class="stat"><div id="ram"></div></div>
+<h3>DISK</h3><div class="stat"><div id="disk"></div></div>
+<h3>NETWORK</h3><div class="stat"><div id="net"></div></div>
 </div>
 
-<div id="consoleTab" style="display:none;">
+<div id="consoleTab" style="display:none">
 <div id="console"></div>
 <input id="cmd"><button onclick="runCmd()">Run</button>
 </div>
 
-<div id="files" style="display:none;">
+<div id="files" style="display:none">
 <div class="file">server.jar</div>
 <div class="file">plugins/</div>
 <div class="file">world/</div>
 <div class="file">logs/</div>
 </div>
 
-<div id="logs" style="display:none;">
-<div id="logBox"></div>
+<div id="logsTab" style="display:none">
+<div id="logs"></div>
 </div>
 
 </div>
@@ -211,53 +193,52 @@ height:220px;background:black;color:#0f0;padding:10px;overflow:auto;font-family:
 <script>
 document.getElementById("ray").innerText=Math.random().toString(36).substring(2,10);
 
-setTimeout(()=>{
-loader.style.display="none";
-loginPage.style.display="flex";
-},3000);
+setTimeout(()=>{loader.style.display="none";loginPage.style.display="flex"},3000);
 
 /* LOGIN */
-const userEmail="chocosmp@gmail.com";
-const userPass="chocosmp123";
-const adminEmail="admin@gmail.com";
-const adminPass="admin2013";
-
 function loginUser(){
-if(userEmail===userEmail){
-loginPage.style.display="none";
-sidebar.style.display="block";
-main.style.display="block";
+if(uEmail.value=="chocosmp@gmail.com" && uPass.value=="chocosmp123"){
+loginPage.style.display="none";sidebar.style.display="block";main.style.display="block";
 }
 }
 
 function loginAdmin(){
-if(
-document.getElementById("adminEmail").value===adminEmail &&
-document.getElementById("adminPass").value===adminPass
-){
-loginPage.style.display="none";
-admin.style.display="block";
+if(aEmail.value=="admin@gmail.com" && aPass.value=="admin2013"){
+loginPage.style.display="none";admin.style.display="block";
 addLog("Admin logged in");
 }
 }
 
-function showPage(id){
+function logout(){location.reload()}
+
+/* USER NAV */
+function show(id){
 document.querySelectorAll(".main .card").forEach(c=>c.style.display="none");
 document.getElementById(id).style.display="block";
 }
 
-function logout(){location.reload();}
-
 /* CHAT */
-let messages=[];
 function send(){
-let msg=document.getElementById("msg").value;
-messages.push(msg);
-chatBox.innerHTML+=`<div>${msg}</div>`;
+let text=msg.value;
+let file=img.files[0];
+let div=document.createElement("div");
+
+if(file){
+let r=new FileReader();
+r.onload=e=>{
+div.innerHTML=text+"<br><img src='"+e.target.result+"'>";
+chatBox.appendChild(div);
+};
+r.readAsDataURL(file);
+}else{
+div.innerText=text;
+chatBox.appendChild(div);
+}
+msg.value="";
 }
 
 /* ADMIN */
-function openTab(id){
+function tab(id){
 document.querySelectorAll(".admin-main > div").forEach(d=>d.style.display="none");
 document.getElementById(id).style.display="block";
 }
@@ -265,36 +246,38 @@ document.getElementById(id).style.display="block";
 function startServer(){
 status.innerText="Starting...";
 addLog("Server starting...");
-setTimeout(()=>{status.innerText="Running";addLog("Server running");},2000);
+let i=0;
+let int=setInterval(()=>{
+i+=5;
+cpu.style.width=i+"%";
+ram.style.width=i+"%";
+disk.style.width=i+"%";
+net.style.width=i+"%";
+if(i>=80){clearInterval(int);status.innerText="Running";addLog("Server started")}
+},200);
 }
 
 function stopServer(){
 status.innerText="Stopped";
+cpu.style.width=ram.style.width=disk.style.width=net.style.width="0%";
 addLog("Server stopped");
 }
 
 function runCmd(){
 let c=cmd.value;
 console.innerHTML+=`<div>> ${c}</div>`;
+if(c.startsWith("op")) console.innerHTML+="<div>OP Given ✔️</div>";
+else console.innerHTML+="<div>Executed ✔️</div>";
 addLog("Command: "+c);
 }
 
+/* LOG */
 function addLog(t){
-logBox.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] ${t}</div>`;
+logs.innerHTML+=`<div>[${new Date().toLocaleTimeString()}] ${t}</div>`;
 }
 
-/* STATS */
-setInterval(()=>{
-cpu.style.width=Math.random()*100+"%";
-ram.style.width=Math.random()*100+"%";
-disk.style.width=Math.random()*100+"%";
-net.style.width=Math.random()*100+"%";
-},1000);
-
 /* TIME */
-setInterval(()=>{
-time.innerText=new Date().toLocaleTimeString();
-},1000);
+setInterval(()=>{time.innerText=new Date().toLocaleTimeString()},1000);
 </script>
 
 </body>
